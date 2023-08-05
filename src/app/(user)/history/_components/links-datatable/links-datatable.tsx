@@ -32,7 +32,6 @@ export const LinksTable = <TData, TValue>({ columns, data }: DataTableProps<TDat
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [rowSelection, setRowSelection] = useState({});
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
   const table = useReactTable({
     data,
     columns,
