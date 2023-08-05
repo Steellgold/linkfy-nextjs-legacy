@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     siteName: data.siteName,
     url: "https://linkfy.fr/",
     type: "website",
-    images: ["/link.png"]
+    images: ["/assets/logo-light.png"]
   },
 
   twitter: {
