@@ -3,31 +3,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 'use client';
 
-import type {
-  SortingState,
-  ColumnDef,
-  ColumnFiltersState,
-} from '@tanstack/react-table';
-import {
-  useReactTable,
-  getCoreRowModel,
-  flexRender,
-  getPaginationRowModel,
-  getSortedRowModel,
-  getFilteredRowModel,
-} from '@tanstack/react-table';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/lib/components/ui/table';
-import { useState, type ReactElement } from 'react';
-import { Button, buttonVariants } from '@/lib/components/ui/button';
-import { Input } from '@/lib/components/ui/input';
-import Link from 'next/link';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -39,6 +14,31 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/lib/components/ui/alert-dialog';
+import { Button, buttonVariants } from '@/lib/components/ui/button';
+import { Input } from '@/lib/components/ui/input';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/lib/components/ui/table';
+import type {
+  ColumnDef,
+  ColumnFiltersState,
+  SortingState,
+} from '@tanstack/react-table';
+import {
+  flexRender,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  useReactTable,
+} from '@tanstack/react-table';
+import Link from 'next/link';
+import { useState } from 'react';
 
 type DataTableProps<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[];
@@ -48,7 +48,7 @@ type DataTableProps<TData, TValue> = {
 export const LinksTable = <TData, TValue>({
   columns,
   data,
-}: DataTableProps<TData, TValue>): ReactElement => {
+}: DataTableProps<TData, TValue>) => {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [rowSelection, setRowSelection] = useState({});
