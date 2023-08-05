@@ -4,9 +4,9 @@ const data = {
   title: "Linkfy",
   description: [
     "Linkfy is a free and open source URL shortener with custom domains and stats.",
-    "Shorten and replace long URL to short link. Track your links."
+    "Shorten and replace long URL to short link. Track your links.",
   ].join(" "),
-  siteName: "Linkfy"
+  siteName: "Linkfy",
 };
 
 export const metadata: Metadata = {
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   title: {
     template: "%s - Linkfy",
     default: "Linkfy",
-    absolute: data.title
+    absolute: data.title,
   },
   description: data.description,
   applicationName: data.siteName,
@@ -26,21 +26,21 @@ export const metadata: Metadata = {
     title: {
       template: "%s - Linkfy",
       default: "Linkfy",
-      absolute: data.title
+      absolute: data.title,
     },
     description: data.description,
     siteName: data.siteName,
     url: "https://linkfy.fr/",
     type: "website",
-    images: ["/assets/logo-light.png"]
+    images: ["/assets/logo-light.png"],
   },
 
   twitter: {
     title: {
       template: "%s - Linkfy",
       default: "Linkfy",
-      absolute: data.title
+      absolute: data.title,
     },
-    description: data.description
-  }
+    description: data.description,
+  },
 };

@@ -1,6 +1,13 @@
 "use client";
 
-import { ArrowUpDown, CircleSlash, Lock, ToggleLeft, ToggleRight, Unlock } from "lucide-react";
+import {
+  ArrowUpDown,
+  CircleSlash,
+  Lock,
+  ToggleLeft,
+  ToggleRight,
+  Unlock,
+} from "lucide-react";
 import { Checkbox } from "@/lib/components/ui/checkbox";
 import type { ColumnDef } from "@tanstack/react-table";
 import { Button } from "@/lib/components/ui/button";
@@ -14,7 +21,7 @@ export type Link = {
   clicks: number;
   created_at: string;
   protected: boolean;
-}
+};
 
 export const linksColumns: ColumnDef<Link>[] = [
   {
@@ -34,7 +41,7 @@ export const linksColumns: ColumnDef<Link>[] = [
       />
     ),
     enableSorting: false,
-    enableHiding: false
+    enableHiding: false,
   },
   {
     accessorKey: "url",
@@ -43,11 +50,18 @@ export const linksColumns: ColumnDef<Link>[] = [
       const url: string = row.getValue("url");
       const finalUrl = url.replace(/(^\w+:|^)\/\//, "").replace(/\/$/, "");
       return typeof finalUrl === "string" ? (
-        <Link href={row.getValue("url")} className="hover:underline" target="_blank" rel="noopener noreferrer">
+        <Link
+          href={row.getValue("url")}
+          className="hover:underline"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           {finalUrl.length > 50 ? `${finalUrl.substring(0, 35)}` : finalUrl}
         </Link>
-      ) : <div className="text-center">N/A</div>;
-    }
+      ) : (
+        <div className="text-center">N/A</div>
+      );
+    },
   },
   { header: "Slug", accessorKey: "slug" },
   {
@@ -58,11 +72,13 @@ export const linksColumns: ColumnDef<Link>[] = [
       return (
         <div className="flex justify-center">
           {status === "active" && <ToggleRight className="h-4 w-4 text-green-500" />}
-          {status === "inactive" && <ToggleLeft className="h-4 w-4 text-yellow-500" />}
+          {status === "inactive" && (
+            <ToggleLeft className="h-4 w-4 text-yellow-500" />
+          )}
           {status === "disabled" && <CircleSlash className="h-4 w-4 text-red-500" />}
         </div>
       );
-    }
+    },
   },
   {
     header: ({ column }) => {
@@ -77,7 +93,10 @@ export const linksColumns: ColumnDef<Link>[] = [
       );
     },
     accessorKey: "clicks",
-    cell: ({ row }) => <div className="flex justify-center">{row.getValue("clicks")}</div> },
+    cell: ({ row }) => (
+      <div className="flex justify-center">{row.getValue("clicks")}</div>
+    ),
+  },
   {
     accessorKey: "protected",
     header: () => <div className="text-left">Protected</div>,
@@ -89,7 +108,7 @@ export const linksColumns: ColumnDef<Link>[] = [
           {status === false && <Unlock className="h-4 w-4 text-green-500" />}
         </div>
       );
-    }
+    },
   },
-  { header: "Created At", accessorKey: "created_at" }
+  { header: "Created At", accessorKey: "created_at" },
 ];

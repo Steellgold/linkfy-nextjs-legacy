@@ -1,11 +1,23 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 "use client";
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/lib/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/lib/components/ui/card";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, buttonVariants } from "@/lib/components/ui/button";
 import { Input } from "@/lib/components/ui/input";
-import { Form, FormControl, FormField, FormItem, FormMessage } from "@/lib/components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "@/lib/components/ui/form";
 import { Outfit } from "next/font/google";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
@@ -20,15 +32,19 @@ const Home = (): React.ReactElement => {
   const [slug, setSlug] = useState<string | null>(null);
 
   const formSchema = z.object({
-    url: z.string().url().nonempty({
-      message: "Your URL is required."
-    }).min(2, {
-      message: "Your URL is too short."
-    })
+    url: z
+      .string()
+      .url()
+      .nonempty({
+        message: "Your URL is required.",
+      })
+      .min(2, {
+        message: "Your URL is too short.",
+      }),
   });
 
   const form = useForm({
-    resolver: zodResolver(formSchema)
+    resolver: zodResolver(formSchema),
   });
 
   const onSubmit = (): void => {
@@ -42,7 +58,8 @@ const Home = (): React.ReactElement => {
         <CardHeader className="-mb-3">
           <CardTitle className={outfit.className}>Shorten your links</CardTitle>
           <CardDescription className={outfit.className}>
-            Generate your short link with a single click and share it with your friends, customers, or social media.
+            Generate your short link with a single click and share it with your
+            friends, customers, or social media.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -55,13 +72,19 @@ const Home = (): React.ReactElement => {
                   render={({ field }) => (
                     <FormItem className="w-full">
                       <FormControl>
-                        <Input className="max-w-3xl" placeholder="https://example.com" {...field} />
+                        <Input
+                          className="max-w-3xl"
+                          placeholder="https://example.com"
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
-                {form.formState.isSubmitted && slug !== null && <Input value={slug} className="w-full" readOnly />}
+                {form.formState.isSubmitted && slug !== null && (
+                  <Input value={slug} className="w-full" readOnly />
+                )}
               </div>
               <div className="flex space-x-2">
                 <Button type="submit" className="w-full flex gap-1">
@@ -74,7 +97,10 @@ const Home = (): React.ReactElement => {
                 <Button>
                   <Copy className="h-4 w-4" />
                 </Button>
-                <Link href={"/history"} className={buttonVariants({ variant: "default" })}>
+                <Link
+                  href={"/history"}
+                  className={buttonVariants({ variant: "default" })}
+                >
                   <History className="h-4 w-4" />
                 </Link>
               </div>
