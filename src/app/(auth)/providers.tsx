@@ -1,6 +1,6 @@
-import { SiDiscord, SiGithub, SiGoogle } from '@icons-pack/react-simple-icons'
-import { Button } from '@/lib/components/ui/button'
-import React from 'react'
+import { SiDiscord, SiGithub, SiGoogle } from "@icons-pack/react-simple-icons"
+import { Button } from "@/lib/components/ui/button"
+import React from "react"
 
 export const Providers = () => {
   return (
