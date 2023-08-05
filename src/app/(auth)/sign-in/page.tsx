@@ -1,44 +1,64 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
-"use client";
+'use client';
 
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/lib/components/ui/card";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "@/lib/components/ui/button";
-import { Input } from "@/lib/components/ui/input";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/lib/components/ui/form";
-import { Outfit } from "next/font/google";
-import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { cn } from "@/lib/utils";
-import { Separator } from "@/lib/components/ui/separator";
-import Image from "next/image";
-import { useTheme } from "next-themes";
-import Link from "next/link";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/lib/components/ui/card';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Button } from '@/lib/components/ui/button';
+import { Input } from '@/lib/components/ui/input';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/lib/components/ui/form';
+import { Outfit } from 'next/font/google';
+import { z } from 'zod';
+import { useForm } from 'react-hook-form';
+import { cn } from '@/lib/utils';
+import { Separator } from '@/lib/components/ui/separator';
+import Image from 'next/image';
+import { useTheme } from 'next-themes';
+import Link from 'next/link';
 
-const outfit = Outfit({ subsets: ["latin"] });
+const outfit = Outfit({ subsets: ['latin'] });
 
 const SignIn = (): React.ReactElement => {
   const { theme } = useTheme();
 
   const formSchema = z.object({
-    email: z.string().email().nonempty({
-      message: "Your email is required."
-    }).min(2, {
-      message: "Your email is too short."
-    }),
-    password: z.string().nonempty({
-      message: "Your password is required."
-    }).min(8, {
-      message: "Your password is too short."
-    })
+    email: z
+      .string()
+      .email()
+      .nonempty({
+        message: 'Your email is required.',
+      })
+      .min(2, {
+        message: 'Your email is too short.',
+      }),
+    password: z
+      .string()
+      .nonempty({
+        message: 'Your password is required.',
+      })
+      .min(8, {
+        message: 'Your password is too short.',
+      }),
   });
 
   const form = useForm({
-    resolver: zodResolver(formSchema)
+    resolver: zodResolver(formSchema),
   });
 
   const onSubmit = (): void => {
-    console.log("Submitted!");
+    console.log('Submitted!');
   };
 
   return (
@@ -57,7 +77,11 @@ const SignIn = (): React.ReactElement => {
                   <FormItem className="w-full">
                     <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <Input type="email" placeholder="john@company.com" {...field} />
+                      <Input
+                        type="email"
+                        placeholder="john@company.com"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -78,7 +102,10 @@ const SignIn = (): React.ReactElement => {
                 )}
               />
 
-              <Button type="submit" className={cn("w-full flex gap-1", outfit.className)}>
+              <Button
+                type="submit"
+                className={cn('w-full flex gap-1', outfit.className)}
+              >
                 Sign in
               </Button>
             </form>
@@ -87,20 +114,34 @@ const SignIn = (): React.ReactElement => {
 
             <div className="flex space-x-2">
               <Button className="w-full flex gap-1">
-                <Image src={"/assets/providers/google.png"} alt={"Google"} width={20} height={20} />
-              </Button>
-
-              <Button className="w-full flex gap-1">
                 <Image
-                  src={"/assets/providers/" + (theme == "dark" ? "github" : "github-white") + ".png"}
-                  alt={"GitHub"}
+                  src={'/assets/providers/google.png'}
+                  alt={'Google'}
                   width={20}
                   height={20}
                 />
               </Button>
 
               <Button className="w-full flex gap-1">
-                <Image src={"/assets/providers/discord.png"} alt={"Google"} width={20} height={20} />
+                <Image
+                  src={
+                    '/assets/providers/' +
+                    (theme == 'dark' ? 'github' : 'github-white') +
+                    '.png'
+                  }
+                  alt={'GitHub'}
+                  width={20}
+                  height={20}
+                />
+              </Button>
+
+              <Button className="w-full flex gap-1">
+                <Image
+                  src={'/assets/providers/discord.png'}
+                  alt={'Google'}
+                  width={20}
+                  height={20}
+                />
               </Button>
             </div>
           </Form>
@@ -108,10 +149,15 @@ const SignIn = (): React.ReactElement => {
 
         <CardFooter className="flex flex-col justify-start items-start">
           <div>
-            You don&apos;t have an account?&nbsp;<Link href={"/sign-up"} className="text-primary hover:underline">Click here to sign up.</Link>
+            You don&apos;t have an account?&nbsp;
+            <Link href={'/sign-up'} className="text-primary hover:underline">
+              Click here to sign up.
+            </Link>
           </div>
           <div>
-            <Link href={"/forgot-password"} className="text-primary hover:underline">Forgot your password?</Link>
+            <Link href={'/forgot-password'} className="text-primary hover:underline">
+              Forgot your password?
+            </Link>
           </div>
         </CardFooter>
       </Card>

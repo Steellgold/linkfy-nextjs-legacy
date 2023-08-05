@@ -1,17 +1,16 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import { Moon, Sun } from "lucide-react";
-import { useTheme } from "next-themes";
+import { Moon, Sun } from 'lucide-react';
+import { useTheme } from 'next-themes';
+import * as React from 'react';
 
-import { Button } from "@/lib/components/ui/button";
+import { Button } from '@/lib/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuTrigger
-} from "@/lib/components/ui/dropdown-menu";
-import { Separator } from "./separator";
+  DropdownMenuTrigger,
+} from '@/lib/components/ui/dropdown-menu';
 
 export const ChooseTheme = (): React.ReactElement => {
   const { setTheme } = useTheme();
@@ -26,13 +25,9 @@ export const ChooseTheme = (): React.ReactElement => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme("light")}>
-          Light
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
-          Dark
-        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme('light')}>Light</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme('dark')}>Dark</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
-}
+};

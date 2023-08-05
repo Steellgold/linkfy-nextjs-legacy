@@ -1,22 +1,20 @@
 /* eslint-disable camelcase */
-import { HomeLayoutGradient } from "@/lib/components/layout/gradient";
-import { ThemeProvider } from "@/lib/components/theme-provider";
-import type { Component } from "@/lib/utils/component";
-import { Analytics } from "@vercel/analytics/react";
-export { metadata } from "@/lib/configs/metadata";
-import { Navbar } from "@/lib/molecules/navbar";
-import type { PropsWithChildren } from "react";
-import { Open_Sans } from "next/font/google";
-import { cn } from "@/lib/utils";
-import "./tailwind.css";
+import { HomeLayoutGradient } from '@/lib/components/layout/gradient';
+import { ThemeProvider } from '@/lib/components/theme-provider';
+import { Navbar } from '@/lib/molecules/navbar';
+import { cn } from '@/lib/utils';
+import { Analytics } from '@vercel/analytics/react';
+import { Open_Sans } from 'next/font/google';
+import { PropsWithChildren } from 'react';
+import './tailwind.css';
+export { metadata } from '@/lib/configs/metadata';
 
+const os = Open_Sans({ subsets: ['latin'] });
 
-const os = Open_Sans({ subsets: ["latin"] });
-
-const RootLayout: Component<PropsWithChildren> = ({ children }) => {
+export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={cn("bg-white dark:bg-[#09090b]", os.className)}>
+      <body className={cn('bg-white dark:bg-[#09090b]', os.className)}>
         <Analytics />
 
         <ThemeProvider attribute="class" defaultTheme="dark">
@@ -31,6 +29,4 @@ const RootLayout: Component<PropsWithChildren> = ({ children }) => {
       </body>
     </html>
   );
-};
-
-export default RootLayout;
+}

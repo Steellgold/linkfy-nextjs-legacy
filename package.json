@@ -2,6 +2,7 @@
   "name": "linkfy-shadcn",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@7.17.1",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,7 +10,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@bluzzi/eslint-config": "^1.1.0",
     "@hookform/resolvers": "^3.1.1",
     "@radix-ui/react-alert-dialog": "^1.0.4",
     "@radix-ui/react-avatar": "^1.0.3",
