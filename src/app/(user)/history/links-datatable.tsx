@@ -44,6 +44,7 @@ import { Badge } from "@/lib/components/ui/badge";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/lib/components/ui/dialog";
 import { Label } from "@/lib/components/ui/label";
 import { Separator } from "@/lib/components/ui/separator";
+import { useMediaQuery } from "usehooks-ts";
 
 type DataTableProps<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[];
@@ -57,17 +58,8 @@ export const LinksTable = <TData, TValue>({
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [rowSelection, setRowSelection] = useState({});
-  const [isOnMobile, setIsOnMobile] = useState(false);
 
-  if (typeof window !== "undefined") {
-    window.addEventListener("resize", () => {
-      if (window.innerWidth <= 640) {
-        setIsOnMobile(true);
-      } else {
-        setIsOnMobile(false);
-      }
-    });
-  }
+  const media = useMediaQuery("(max-width: 640px)");
 
   const table = useReactTable({
     data,
@@ -101,7 +93,7 @@ export const LinksTable = <TData, TValue>({
         <div className="mr-3 flex gap-2 ">
           {table.getFilteredSelectedRowModel().rows.length == 0 ? (
             <>
-              {isOnMobile ? (
+              {media ? (
                 <Link href={"/"} className={buttonVariants({ variant: "default" })}><Plus className="h-4 w-4" /></Link>
               ) : (
                 <Link href={"/"} className={buttonVariants({ variant: "default" })}>Create link</Link>
@@ -110,20 +102,9 @@ export const LinksTable = <TData, TValue>({
           ) : null}
           
           {table.getFilteredSelectedRowModel().rows.length > 0 ? (
-            // <>
-            //   {isOnMobile ? (
-            //     <Button variant="default" size={"icon"} disabled={table.getFilteredSelectedRowModel().rows.length <= 1}>
-            //       <LayoutTemplate className="h-4 w-4" />
-            //     </Button>
-            //   ) : (
-            //     <Button variant="default" disabled={table.getFilteredSelectedRowModel().rows.length <= 1}>
-            //       Create a list
-            //     </Button>
-            //   )}
-            // </>
             <Dialog>
               <DialogTrigger>
-                {isOnMobile ? (
+                {media ? (
                   <Button variant="default" size={"icon"} disabled={table.getFilteredSelectedRowModel().rows.length <= 1}>
                     <LayoutTemplate className="h-4 w-4" />
                   </Button>
@@ -184,7 +165,7 @@ export const LinksTable = <TData, TValue>({
           {table.getFilteredSelectedRowModel().rows.length > 0 ? (
             <AlertDialog>
               <AlertDialogTrigger asChild>
-                {isOnMobile ? (
+                {media ? (
                   <Button variant="destructive" size="icon" disabled={!table.getFilteredSelectedRowModel().rows.length}>
                     <Trash className="h-4 w-4" />
                   </Button>
