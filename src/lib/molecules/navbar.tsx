@@ -6,6 +6,11 @@ import { cn } from '@/lib/utils';
 import { useTheme } from 'next-themes';
 import Image from 'next/image';
 import Link from 'next/link';
+import React from 'react';
+
+export default function navbar() {
+  return <div>navbar</div>;
+}
 
 export const Navbar = () => {
   const { theme } = useTheme();
