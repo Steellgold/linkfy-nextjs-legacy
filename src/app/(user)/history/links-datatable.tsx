@@ -34,6 +34,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import { Trash } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -69,7 +70,7 @@ export const LinksTable = <TData, TValue>({
 
   return (
     <div>
-      <div className="flex items-center justify-between ml-3 py-4">
+      <div className="flex items-center justify-between py-4 space-x-2 px-3">
         <Input
           placeholder="Filter by URL"
           value={(table.getColumn("url")?.getFilterValue() as string) ?? ""}
@@ -83,12 +84,8 @@ export const LinksTable = <TData, TValue>({
           {table.getFilteredSelectedRowModel().rows.length > 0 ? (
             <AlertDialog>
               <AlertDialogTrigger>
-                <Button
-                  variant="destructive"
-                  size="sm"
-                  disabled={!table.getFilteredSelectedRowModel().rows.length}
-                >
-                  Delete
+                <Button variant="destructive" size="icon" disabled={!table.getFilteredSelectedRowModel().rows.length}>
+                  <Trash className="h-4 w-4" />
                 </Button>
               </AlertDialogTrigger>
               <AlertDialogContent>
@@ -168,7 +165,7 @@ export const LinksTable = <TData, TValue>({
             {table.getFilteredRowModel().rows.length} row(s) selected.
           </div>
         </div>
-        <div>
+        <div className="flex space-x-2">
           <Button
             variant="outline"
             size="sm"
