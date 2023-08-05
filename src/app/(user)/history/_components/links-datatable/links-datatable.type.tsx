@@ -40,7 +40,8 @@ export const linksColumns: ColumnDef<Link>[] = [
     accessorKey: "url",
     header: () => <div className="text-left">URL</div>,
     cell: ({ row }) => {
-      const finalUrl = (row.getValue("url")).replace(/(^\w+:|^)\/\//, "").replace(/\/$/, "");
+      const url: string = row.getValue("url");
+      const finalUrl = url.replace(/(^\w+:|^)\/\//, "").replace(/\/$/, "");
       return typeof finalUrl === "string" ? (
         <Link href={row.getValue("url")} className="hover:underline" target="_blank" rel="noopener noreferrer">
           {finalUrl.length > 50 ? `${finalUrl.substring(0, 35)}` : finalUrl}
