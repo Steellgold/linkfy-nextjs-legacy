@@ -50,6 +50,17 @@ export const LinksTable = <TData, TValue>({
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [rowSelection, setRowSelection] = useState({});
+  const [isOnMobile, setIsOnMobile] = useState(false);
+
+  if (typeof window !== "undefined") {
+    window.addEventListener("resize", () => {
+      if (window.innerWidth <= 640) {
+        setIsOnMobile(true);
+      } else {
+        setIsOnMobile(false);
+      }
+    });
+  }
 
   const table = useReactTable({
     data,
@@ -84,9 +95,15 @@ export const LinksTable = <TData, TValue>({
           {table.getFilteredSelectedRowModel().rows.length > 0 ? (
             <AlertDialog>
               <AlertDialogTrigger>
-                <Button variant="destructive" size="icon" disabled={!table.getFilteredSelectedRowModel().rows.length}>
-                  <Trash className="h-4 w-4" />
-                </Button>
+                {isOnMobile ? (
+                  <Button variant="destructive" size="icon" disabled={!table.getFilteredSelectedRowModel().rows.length}>
+                    <Trash className="h-4 w-4" />
+                  </Button>
+                ) : (
+                  <Button variant="destructive" disabled={!table.getFilteredSelectedRowModel().rows.length}>
+                    Delete
+                  </Button>
+                )}
               </AlertDialogTrigger>
               <AlertDialogContent>
                 <AlertDialogHeader>
