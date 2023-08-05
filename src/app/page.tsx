@@ -3,15 +3,16 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/lib/components/ui/card";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "@/lib/components/ui/button";
+import { Button, buttonVariants } from "@/lib/components/ui/button";
 import { Input } from "@/lib/components/ui/input";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/lib/components/ui/form";
 import { Outfit } from "next/font/google";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
-import { Copy, Link, QrCode } from "lucide-react";
+import { Copy, History, Link as IconLink, QrCode } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 const outfit = Outfit({ subsets: ["latin"] });
 
@@ -64,15 +65,18 @@ const Home = (): React.ReactElement => {
               </div>
               <div className="flex space-x-2">
                 <Button type="submit" className="w-full flex gap-1">
-                  <Link className="h-3.5 w-3.5" />
+                  <IconLink className="h-3.5 w-3.5" />
                   Shorten
                 </Button>
                 <Button>
-                  <QrCode className="h-3.5 w-3.5" />
+                  <QrCode className="h-4 w-4" />
                 </Button>
                 <Button>
-                  <Copy className="h-3.5 w-3.5" />
+                  <Copy className="h-4 w-4" />
                 </Button>
+                <Link href={"/history"} className={buttonVariants({ variant: "default" })}>
+                  <History className="h-4 w-4" />
+                </Link>
               </div>
             </form>
           </Form>

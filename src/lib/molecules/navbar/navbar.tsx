@@ -15,13 +15,15 @@ export const Navbar: Component<ComponentPropsWithoutRef<"nav">> = ({ ...props })
 
   return (
     <nav className={cn("flex justify-between items-center px-5 mx-auto max-w-screen-xl mt-3", props.className)} {...props} suppressHydrationWarning>
-      {theme == "dark" && (
-        <Image src={"/assets/logo-light.png"} alt={"Linkfy"} width={40} height={40} />
-      ) || theme == "light" && (
-        <Image src={"/assets/logo-dark.png"} alt={"Linkfy"} width={40} height={40} />
-      ) || (
-        <Image src={"/assets/logo-light.png"} alt={"Linkfy"} width={40} height={40} />
-      )}
+      <Link href={"/"}>
+        {theme == "dark" && (
+          <Image src={"/assets/logo-light.png"} alt={"Linkfy"} width={40} height={40} />
+        ) || theme == "light" && (
+          <Image src={"/assets/logo-dark.png"} alt={"Linkfy"} width={40} height={40} />
+        ) || (
+          <Image src={"/assets/logo-light.png"} alt={"Linkfy"} width={40} height={40} />
+        )}
+      </Link>
 
       <div className="flex h-5 items-center space-x-2 text-sm">
         <Link href={"/"} className={buttonVariants({ variant: "link" })}>Pricing</Link>
