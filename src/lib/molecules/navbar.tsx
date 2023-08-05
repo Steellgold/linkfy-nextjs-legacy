@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { buttonVariants } from '@/lib/components/ui/button';
-import { ChooseTheme } from '@/lib/components/ui/choose-theme';
-import { cn } from '@/lib/utils';
-import { useTheme } from 'next-themes';
-import Image from 'next/image';
-import Link from 'next/link';
-import React from 'react';
+import { buttonVariants } from "@/lib/components/ui/button";
+import { ChooseTheme } from "@/lib/components/ui/choose-theme";
+import { cn } from "@/lib/utils";
+import { useTheme } from "next-themes";
+import Image from "next/image";
+import Link from "next/link";
+import React from "react";
 
 export default function navbar() {
   return <div>navbar</div>;
@@ -18,30 +18,30 @@ export const Navbar = () => {
   return (
     <nav
       className={cn(
-        'mx-auto mt-3 flex max-w-screen-xl items-center justify-between px-5'
+        "mx-auto mt-3 flex max-w-screen-xl items-center justify-between px-5"
       )}
       suppressHydrationWarning
     >
-      <Link href={'/'}>
-        {(theme == 'dark' && (
+      <Link href={"/"}>
+        {(theme == "dark" && (
           <Image
-            src={'/assets/logo-light.png'}
-            alt={'Linkfy'}
+            src={"/assets/logo-light.png"}
+            alt={"Linkfy"}
             width={40}
             height={40}
           />
         )) ||
-          (theme == 'light' && (
+          (theme == "light" && (
             <Image
-              src={'/assets/logo-dark.png'}
-              alt={'Linkfy'}
+              src={"/assets/logo-dark.png"}
+              alt={"Linkfy"}
               width={40}
               height={40}
             />
           )) || (
             <Image
-              src={'/assets/logo-light.png'}
-              alt={'Linkfy'}
+              src={"/assets/logo-light.png"}
+              alt={"Linkfy"}
               width={40}
               height={40}
             />
@@ -49,13 +49,13 @@ export const Navbar = () => {
       </Link>
 
       <div className="flex h-5 items-center space-x-2 text-sm">
-        <Link href={'/'} className={buttonVariants({ variant: 'link' })}>
+        <Link href={"/"} className={buttonVariants({ variant: "link" })}>
           Pricing
         </Link>
-        <Link href={'/'} className={buttonVariants({ variant: 'link' })}>
+        <Link href={"/"} className={buttonVariants({ variant: "link" })}>
           API
         </Link>
-        <Link href={'/sign-in'} className={buttonVariants({ variant: 'outline' })}>
+        <Link href={"/sign-in"} className={buttonVariants({ variant: "outline" })}>
           Sign in
         </Link>
         <ChooseTheme />

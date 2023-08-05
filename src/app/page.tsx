@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
-'use client';
+"use client";
 
 import {
   Card,
@@ -7,26 +7,26 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/lib/components/ui/card';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, buttonVariants } from '@/lib/components/ui/button';
-import { Input } from '@/lib/components/ui/input';
+} from "@/lib/components/ui/card";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Button, buttonVariants } from "@/lib/components/ui/button";
+import { Input } from "@/lib/components/ui/input";
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormMessage,
-} from '@/lib/components/ui/form';
-import { Outfit } from 'next/font/google';
-import { z } from 'zod';
-import { useForm } from 'react-hook-form';
-import { Copy, History, Link as IconLink, QrCode } from 'lucide-react';
-import { useState } from 'react';
-import { cn } from '@/lib/utils';
-import Link from 'next/link';
+} from "@/lib/components/ui/form";
+import { Outfit } from "next/font/google";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { Copy, History, Link as IconLink, QrCode } from "lucide-react";
+import { useState } from "react";
+import { cn } from "@/lib/utils";
+import Link from "next/link";
 
-const outfit = Outfit({ subsets: ['latin'] });
+const outfit = Outfit({ subsets: ["latin"] });
 
 const Home = (): React.ReactElement => {
   const [slug, setSlug] = useState<string | null>(null);
@@ -36,10 +36,10 @@ const Home = (): React.ReactElement => {
       .string()
       .url()
       .nonempty({
-        message: 'Your URL is required.',
+        message: "Your URL is required.",
       })
       .min(2, {
-        message: 'Your URL is too short.',
+        message: "Your URL is too short.",
       }),
   });
 
@@ -65,7 +65,7 @@ const Home = (): React.ReactElement => {
         <CardContent>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
-              <div className={cn({ 'flex space-x-2': slug !== null })}>
+              <div className={cn({ "flex space-x-2": slug !== null })}>
                 <FormField
                   control={form.control}
                   name="url"
@@ -98,8 +98,8 @@ const Home = (): React.ReactElement => {
                   <Copy className="h-4 w-4" />
                 </Button>
                 <Link
-                  href={'/history'}
-                  className={buttonVariants({ variant: 'default' })}
+                  href={"/history"}
+                  className={buttonVariants({ variant: "default" })}
                 >
                   <History className="h-4 w-4" />
                 </Link>

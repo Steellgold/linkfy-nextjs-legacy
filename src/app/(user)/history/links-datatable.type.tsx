@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   ArrowUpDown,
@@ -7,17 +7,17 @@ import {
   ToggleLeft,
   ToggleRight,
   Unlock,
-} from 'lucide-react';
-import { Checkbox } from '@/lib/components/ui/checkbox';
-import type { ColumnDef } from '@tanstack/react-table';
-import { Button } from '@/lib/components/ui/button';
-import Link from 'next/link';
+} from "lucide-react";
+import { Checkbox } from "@/lib/components/ui/checkbox";
+import type { ColumnDef } from "@tanstack/react-table";
+import { Button } from "@/lib/components/ui/button";
+import Link from "next/link";
 
 export type Link = {
   id: number;
   url: string;
   slug: string;
-  status: 'active' | 'inactive' | 'disabled';
+  status: "active" | "inactive" | "disabled";
   clicks: number;
   created_at: string;
   protected: boolean;
@@ -25,7 +25,7 @@ export type Link = {
 
 export const linksColumns: ColumnDef<Link>[] = [
   {
-    id: 'select',
+    id: "select",
     header: ({ table }) => (
       <Checkbox
         checked={table.getIsAllPageRowsSelected()}
@@ -44,14 +44,14 @@ export const linksColumns: ColumnDef<Link>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: 'url',
+    accessorKey: "url",
     header: () => <div className="text-left">URL</div>,
     cell: ({ row }) => {
-      const url: string = row.getValue('url');
-      const finalUrl = url.replace(/(^\w+:|^)\/\//, '').replace(/\/$/, '');
-      return typeof finalUrl === 'string' ? (
+      const url: string = row.getValue("url");
+      const finalUrl = url.replace(/(^\w+:|^)\/\//, "").replace(/\/$/, "");
+      return typeof finalUrl === "string" ? (
         <Link
-          href={row.getValue('url')}
+          href={row.getValue("url")}
           className="hover:underline"
           target="_blank"
           rel="noopener noreferrer"
@@ -63,19 +63,19 @@ export const linksColumns: ColumnDef<Link>[] = [
       );
     },
   },
-  { header: 'Slug', accessorKey: 'slug' },
+  { header: "Slug", accessorKey: "slug" },
   {
-    accessorKey: 'status',
+    accessorKey: "status",
     header: () => <div className="text-left">Status</div>,
     cell: ({ row }) => {
-      const status = row.getValue('status');
+      const status = row.getValue("status");
       return (
         <div className="flex justify-center">
-          {status === 'active' && <ToggleRight className="h-4 w-4 text-green-500" />}
-          {status === 'inactive' && (
+          {status === "active" && <ToggleRight className="h-4 w-4 text-green-500" />}
+          {status === "inactive" && (
             <ToggleLeft className="h-4 w-4 text-yellow-500" />
           )}
-          {status === 'disabled' && <CircleSlash className="h-4 w-4 text-red-500" />}
+          {status === "disabled" && <CircleSlash className="h-4 w-4 text-red-500" />}
         </div>
       );
     },
@@ -85,23 +85,23 @@ export const linksColumns: ColumnDef<Link>[] = [
       return (
         <Button
           variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Clicks
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
     },
-    accessorKey: 'clicks',
+    accessorKey: "clicks",
     cell: ({ row }) => (
-      <div className="flex justify-center">{row.getValue('clicks')}</div>
+      <div className="flex justify-center">{row.getValue("clicks")}</div>
     ),
   },
   {
-    accessorKey: 'protected',
+    accessorKey: "protected",
     header: () => <div className="text-left">Protected</div>,
     cell: ({ row }) => {
-      const status = row.getValue('protected');
+      const status = row.getValue("protected");
       return (
         <div className="flex justify-center">
           {status === true && <Lock className="h-4 w-4 text-red-500" />}
@@ -110,5 +110,5 @@ export const linksColumns: ColumnDef<Link>[] = [
       );
     },
   },
-  { header: 'Created At', accessorKey: 'created_at' },
+  { header: "Created At", accessorKey: "created_at" },
 ];

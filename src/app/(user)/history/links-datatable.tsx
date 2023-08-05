@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-'use client';
+"use client";
 
 import {
   AlertDialog,
@@ -13,9 +13,9 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from '@/lib/components/ui/alert-dialog';
-import { Button, buttonVariants } from '@/lib/components/ui/button';
-import { Input } from '@/lib/components/ui/input';
+} from "@/lib/components/ui/alert-dialog";
+import { Button, buttonVariants } from "@/lib/components/ui/button";
+import { Input } from "@/lib/components/ui/input";
 import {
   Table,
   TableBody,
@@ -23,12 +23,12 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/lib/components/ui/table';
+} from "@/lib/components/ui/table";
 import type {
   ColumnDef,
   ColumnFiltersState,
   SortingState,
-} from '@tanstack/react-table';
+} from "@tanstack/react-table";
 import {
   flexRender,
   getCoreRowModel,
@@ -36,9 +36,9 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
-} from '@tanstack/react-table';
-import Link from 'next/link';
-import { useState } from 'react';
+} from "@tanstack/react-table";
+import Link from "next/link";
+import { useState } from "react";
 
 type DataTableProps<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[];
@@ -75,9 +75,9 @@ export const LinksTable = <TData, TValue>({
       <div className="flex items-center justify-between ml-3 py-4">
         <Input
           placeholder="Filter by URL"
-          value={(table.getColumn('url')?.getFilterValue() as string) ?? ''}
+          value={(table.getColumn("url")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
-            table.getColumn('url')?.setFilterValue(event.target.value)
+            table.getColumn("url")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />
@@ -106,8 +106,8 @@ export const LinksTable = <TData, TValue>({
                 <AlertDialogFooter>
                   <AlertDialogCancel>Cancel</AlertDialogCancel>
                   <AlertDialogAction
-                    onClick={() => console.log('Deleted successfully.')}
-                    className={buttonVariants({ variant: 'destructive' })}
+                    onClick={() => console.log("Deleted successfully.")}
+                    className={buttonVariants({ variant: "destructive" })}
                   >
                     Delete
                   </AlertDialogAction>
@@ -142,7 +142,7 @@ export const LinksTable = <TData, TValue>({
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
-                  data-state={row.getIsSelected() && 'selected'}
+                  data-state={row.getIsSelected() && "selected"}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
@@ -155,7 +155,7 @@ export const LinksTable = <TData, TValue>({
               <TableRow>
                 <TableCell colSpan={columns.length} className="h-24 text-center">
                   No links found, create one first in the home page.&nbsp;
-                  <Link href={'/'} className="hover:underline">
+                  <Link href={"/"} className="hover:underline">
                     click here to create one
                   </Link>
                 </TableCell>
@@ -167,7 +167,7 @@ export const LinksTable = <TData, TValue>({
       <div className="flex items-center justify-between space-x-2 py-4 mr-3">
         <div>
           <div className="flex-1 text-sm text-muted-foreground ml-3">
-            {table.getFilteredSelectedRowModel().rows.length} of{' '}
+            {table.getFilteredSelectedRowModel().rows.length} of{" "}
             {table.getFilteredRowModel().rows.length} row(s) selected.
           </div>
         </div>
