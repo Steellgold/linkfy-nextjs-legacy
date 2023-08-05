@@ -24,15 +24,12 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { cn } from "@/lib/utils";
 import { Separator } from "@/lib/components/ui/separator";
-import Image from "next/image";
-import { useTheme } from "next-themes";
 import Link from "next/link";
+import { Providers } from "../providers";
 
 const outfit = Outfit({ subsets: ["latin"] });
 
 const SignIn = (): React.ReactElement => {
-  const { theme } = useTheme();
-
   const formSchema = z.object({
     email: z
       .string()
@@ -111,39 +108,7 @@ const SignIn = (): React.ReactElement => {
             </form>
 
             <Separator className="my-3" />
-
-            <div className="flex space-x-2">
-              <Button className="w-full flex gap-1">
-                <Image
-                  src={"/assets/providers/google.png"}
-                  alt={"Google"}
-                  width={20}
-                  height={20}
-                />
-              </Button>
-
-              <Button className="w-full flex gap-1">
-                <Image
-                  src={
-                    "/assets/providers/" +
-                    (theme == "dark" ? "github" : "github-white") +
-                    ".png"
-                  }
-                  alt={"GitHub"}
-                  width={20}
-                  height={20}
-                />
-              </Button>
-
-              <Button className="w-full flex gap-1">
-                <Image
-                  src={"/assets/providers/discord.png"}
-                  alt={"Google"}
-                  width={20}
-                  height={20}
-                />
-              </Button>
-            </div>
+            <Providers />
           </Form>
         </CardContent>
 
