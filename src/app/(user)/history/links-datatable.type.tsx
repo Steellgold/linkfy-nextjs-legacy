@@ -4,6 +4,7 @@ import {
   ArrowUpDown,
   CircleSlash,
   Lock,
+  Settings,
   ToggleLeft,
   ToggleRight,
   Unlock,
@@ -82,7 +83,7 @@ export const linksColumns: ColumnDef<Link>[] = [
               <TooltipContent>
                 {status === "active" && "Active"}
                 {status === "inactive" && "Inactive"}
-                {status === "disabled" && "Disabled"}
+                {status === "disabled" && "Disabled by an administator"}
               </TooltipContent>
             </Tooltip>
           </TooltipProvider>
@@ -114,11 +115,33 @@ export const linksColumns: ColumnDef<Link>[] = [
       const status = row.getValue("protected");
       return (
         <div className="flex justify-center">
-          {status === true && <Lock className="h-4 w-4 text-red-500" />}
-          {status === false && <Unlock className="h-4 w-4 text-green-500" />}
+          <TooltipProvider skipDelayDuration={1} delayDuration={1}>
+            <Tooltip>
+              <TooltipTrigger>
+                {status === true && <Lock className="h-4 w-4 text-red-500" />}
+                {status === false && <Unlock className="h-4 w-4 text-green-500" />}
+              </TooltipTrigger>
+              <TooltipContent>
+                {status === true && "Protected (requires password)"}
+                {status === false && "Not Protected (no password required)"}
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         </div>
       );
     },
   },
   { header: "Created At", accessorKey: "created_at" },
+  // actions
+  {
+    id: "actions",
+    header: () => <span className="sr-only">Actions</span>,
+    cell: () => (
+      <Button variant={"ghost"}>
+        <Settings className="h-4 w-4" />
+      </Button>
+    ),
+    enableSorting: false,
+    enableHiding: false,
+  }    
 ];
