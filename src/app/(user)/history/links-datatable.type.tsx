@@ -12,6 +12,7 @@ import { Checkbox } from "@/lib/components/ui/checkbox";
 import type { ColumnDef } from "@tanstack/react-table";
 import { Button } from "@/lib/components/ui/button";
 import Link from "next/link";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/lib/components/ui/tooltip";
 
 export type Link = {
   id: number;
@@ -71,11 +72,20 @@ export const linksColumns: ColumnDef<Link>[] = [
       const status = row.getValue("status");
       return (
         <div className="flex justify-center">
-          {status === "active" && <ToggleRight className="h-4 w-4 text-green-500" />}
-          {status === "inactive" && (
-            <ToggleLeft className="h-4 w-4 text-yellow-500" />
-          )}
-          {status === "disabled" && <CircleSlash className="h-4 w-4 text-red-500" />}
+          <TooltipProvider skipDelayDuration={1} delayDuration={1}>
+            <Tooltip>
+              <TooltipTrigger>
+                {status === "active" && <ToggleRight className="cursor-auto h-4 w-4 text-green-500" />}
+                {status === "inactive" && <ToggleLeft className="cursor-auto h-4 w-4 text-yellow-500" />}
+                {status === "disabled" && <CircleSlash className="cursor-auto h-4 w-4 text-red-500" />}
+              </TooltipTrigger>
+              <TooltipContent>
+                {status === "active" && "Active"}
+                {status === "inactive" && "Inactive"}
+                {status === "disabled" && "Disabled"}
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         </div>
       );
     },
