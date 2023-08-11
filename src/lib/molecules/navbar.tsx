@@ -8,10 +8,6 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-export default function navbar() {
-  return <div>navbar</div>;
-}
-
 export const Navbar = () => {
   const { theme } = useTheme();
 
@@ -24,27 +20,12 @@ export const Navbar = () => {
     >
       <Link href={"/"}>
         {(theme == "dark" && (
-          <Image
-            src={"/assets/logo-light.png"}
-            alt={"Linkfy"}
-            width={40}
-            height={40}
-          />
+          <Image src={"/assets/logo-light.png"} alt={"Linkfy"} width={40} height={40} />
         )) ||
           (theme == "light" && (
-            <Image
-              src={"/assets/logo-dark.png"}
-              alt={"Linkfy"}
-              width={40}
-              height={40}
-            />
+            <Image src={"/assets/logo-dark.png"} alt={"Linkfy"} width={40} height={40} />
           )) || (
-            <Image
-              src={"/assets/logo-light.png"}
-              alt={"Linkfy"}
-              width={40}
-              height={40}
-            />
+            <Image src={"/assets/logo-light.png"} alt={"Linkfy"} width={40} height={40} />
           )}
       </Link>
 

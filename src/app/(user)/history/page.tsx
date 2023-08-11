@@ -109,7 +109,7 @@ export default function History() {
 
   return (
     <div className="mt-10 flex flex-col items-center justify-center px-3 md:mt-16">
-      <Card className="w-full max-w-[70rem]">
+      <Card className="w-full max-w-7xl">
         <LinksTable columns={linksColumns} data={links} />
       </Card>
     </div>

@@ -4,6 +4,7 @@ import {
   ArrowUpDown,
   CircleSlash,
   Lock,
+  Settings,
   ToggleLeft,
   ToggleRight,
   Unlock,
@@ -12,6 +13,7 @@ import { Checkbox } from "@/lib/components/ui/checkbox";
 import type { ColumnDef } from "@tanstack/react-table";
 import { Button } from "@/lib/components/ui/button";
 import Link from "next/link";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/lib/components/ui/tooltip";
 
 export type Link = {
   id: number;
@@ -71,11 +73,20 @@ export const linksColumns: ColumnDef<Link>[] = [
       const status = row.getValue("status");
       return (
         <div className="flex justify-center">
-          {status === "active" && <ToggleRight className="h-4 w-4 text-green-500" />}
-          {status === "inactive" && (
-            <ToggleLeft className="h-4 w-4 text-yellow-500" />
-          )}
-          {status === "disabled" && <CircleSlash className="h-4 w-4 text-red-500" />}
+          <TooltipProvider skipDelayDuration={1} delayDuration={1}>
+            <Tooltip>
+              <TooltipTrigger>
+                {status === "active" && <ToggleRight className="cursor-auto h-4 w-4 text-green-500" />}
+                {status === "inactive" && <ToggleLeft className="cursor-auto h-4 w-4 text-yellow-500" />}
+                {status === "disabled" && <CircleSlash className="cursor-auto h-4 w-4 text-red-500" />}
+              </TooltipTrigger>
+              <TooltipContent>
+                {status === "active" && "Active"}
+                {status === "inactive" && "Inactive"}
+                {status === "disabled" && "Disabled by an administator"}
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         </div>
       );
     },
@@ -104,11 +115,33 @@ export const linksColumns: ColumnDef<Link>[] = [
       const status = row.getValue("protected");
       return (
         <div className="flex justify-center">
-          {status === true && <Lock className="h-4 w-4 text-red-500" />}
-          {status === false && <Unlock className="h-4 w-4 text-green-500" />}
+          <TooltipProvider skipDelayDuration={1} delayDuration={1}>
+            <Tooltip>
+              <TooltipTrigger>
+                {status === true && <Lock className="h-4 w-4 text-red-500" />}
+                {status === false && <Unlock className="h-4 w-4 text-green-500" />}
+              </TooltipTrigger>
+              <TooltipContent>
+                {status === true && "Protected (requires password)"}
+                {status === false && "Not Protected (no password required)"}
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         </div>
       );
     },
   },
   { header: "Created At", accessorKey: "created_at" },
+  // actions
+  {
+    id: "actions",
+    header: () => <span className="sr-only">Actions</span>,
+    cell: () => (
+      <Button variant={"ghost"}>
+        <Settings className="h-4 w-4" />
+      </Button>
+    ),
+    enableSorting: false,
+    enableHiding: false,
+  }    
 ];
