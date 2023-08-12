@@ -5,7 +5,7 @@ import { Separator } from "@/lib/components/ui/separator";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/lib/components/ui/tooltip";
 import Link from "next/link";
 
-const workspaces = [
+const workspaces: { title: string; description: string; href: string; default: boolean }[] = [
   // { title: "Personal", description: "Your personal workspace", href: "/workspace/personal", default: true },
   // { title: "Secret project", description: "A secret project", href: "/workspace/18a1b2c3", default: false },
 ]
