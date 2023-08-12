@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import { Checkbox } from "@/lib/components/ui/checkbox";
 import type { ColumnDef } from "@tanstack/react-table";
-import { Button } from "@/lib/components/ui/button";
+import { Button, buttonVariants } from "@/lib/components/ui/button";
 import Link from "next/link";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/lib/components/ui/tooltip";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/lib/components/ui/dropdown-menu";
@@ -60,7 +60,7 @@ export const linksColumns: ColumnDef<Link>[] = [
           target="_blank"
           rel="noopener noreferrer"
         >
-          {finalUrl.length > 50 ? `${finalUrl.substring(0, 35)}` : finalUrl}
+          {finalUrl.length > 50 ? `${finalUrl.substring(0, 35)}...` : finalUrl}
         </Link>
       ) : (
         <div className="text-center">N/A</div>
@@ -139,27 +139,9 @@ export const linksColumns: ColumnDef<Link>[] = [
     enableSorting: false,
     enableHiding: false,
     cell: () => (
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant="ghost">
-            <Settings className="h-4 w-4" />
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent className="w-48">
-          <DropdownMenuItem>
-            Go to
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            Statistics
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-          Generate QR Code
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            Chat with AI&nbsp;<Badge variant="premium">Plus</Badge>
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
+      <Link href={`links/${1}`} className={buttonVariants({ variant: "outline"})} passHref>
+        <Settings className="h-4 w-4" />
+      </Link>
     )
   }    
 ];

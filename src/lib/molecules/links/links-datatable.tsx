@@ -1,43 +1,16 @@
 "use client";
 
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/lib/components/ui/alert-dialog";
+import { flexRender, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, useReactTable } from "@tanstack/react-table";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/lib/components/ui/table";
+import type { ColumnDef, ColumnFiltersState, SortingState } from "@tanstack/react-table";
 import { Button, buttonVariants } from "@/lib/components/ui/button";
-import { Input } from "@/lib/components/ui/input";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/lib/components/ui/table";
 import { AlertDialogTrigger } from "@radix-ui/react-alert-dialog";
-import type {
-  ColumnDef,
-  ColumnFiltersState,
-  SortingState,
-} from "@tanstack/react-table";
-import {
-  flexRender,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
-import { BarChart2, BrainCircuitIcon, LinkIcon, Plus, QrCode, Settings, Trash } from "lucide-react";
-import Link from "next/link";
-import { useState } from "react";
-import {
-  ContextMenu,
-  ContextMenuContent,
-  ContextMenuItem,
-  ContextMenuSeparator,
-  ContextMenuShortcut,
-  ContextMenuTrigger,
-} from "@/lib/components/ui/context-menu";
-import { Badge } from "@/lib/components/ui/badge";
+import { Input } from "@/lib/components/ui/input";
 import { useMediaQuery } from "usehooks-ts";
+import { Plus, Trash } from "lucide-react";
+import { useState } from "react";
+import Link from "next/link";
 
 type DataTableProps<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[];
@@ -149,62 +122,13 @@ export const LinksTable = <TData, TValue>({
           <TableBody>
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
-                <ContextMenu key={row.id}>
-                  <ContextMenuTrigger asChild>
-                    <TableRow data-state={row.getIsSelected() && "selected"}>
-                      {row.getVisibleCells().map((cell) => (
-                        <TableCell key={cell.id}>
-                          {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                        </TableCell>
-                      ))}
-                    </TableRow>
-                  </ContextMenuTrigger>
-                  <ContextMenuContent className="w-64">
-                    <Link href={row.getValue("url")}>
-                      <ContextMenuItem className="cursor-pointer">
-                        Go to
-                        <ContextMenuShortcut>
-                          <LinkIcon className="h-4 w-4 ml-2" />
-                        </ContextMenuShortcut>
-                      </ContextMenuItem>
-                    </Link>
-                    <Link href={row.getValue("slug") + "/stats"}>
-                      <ContextMenuItem className="cursor-pointer">
-                        Statistics
-                        <ContextMenuShortcut>
-                          <BarChart2 className="h-4 w-4 ml-2" />
-                        </ContextMenuShortcut>
-                      </ContextMenuItem>
-                    </Link>
-                    <Link href={row.getValue("slug") + "/settings"}>
-                      <ContextMenuItem className="cursor-pointer">
-                        Settings
-                        <ContextMenuShortcut>
-                          <Settings className="h-4 w-4 ml-2" />
-                        </ContextMenuShortcut>
-                      </ContextMenuItem>
-                    </Link>
-                    <ContextMenuItem>
-                      Generate QR Code
-                      <ContextMenuShortcut>
-                        <QrCode className="h-4 w-4 ml-2" />
-                      </ContextMenuShortcut>
-                    </ContextMenuItem>
-                    <ContextMenuItem className="group">
-                      Chat with AI&nbsp;<Badge variant="premium">Plus</Badge>
-                      <ContextMenuShortcut>
-                        <BrainCircuitIcon className="h-4 w-4 ml-2" />
-                      </ContextMenuShortcut>
-                    </ContextMenuItem>
-                    <ContextMenuSeparator />
-                    <ContextMenuItem className="group transition-colors">
-                      <span className="group-hover:text-red-500">Delete</span>
-                      <ContextMenuShortcut>
-                        <Trash className="group-hover:text-red-500 h-4 w-4 ml-2" />
-                      </ContextMenuShortcut>
-                    </ContextMenuItem>
-                  </ContextMenuContent>
-                </ContextMenu>
+                <TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
+                  {row.getVisibleCells().map((cell) => (
+                    <TableCell key={cell.id}>
+                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    </TableCell>
+                  ))}
+                </TableRow>
               ))
             ) : (
               <TableRow>
