@@ -6,9 +6,9 @@ const sidebarNavItems = [
   { title: "Links", href: "links" },
   { title: "Trees", href: "trees" },
   { title: "Domains", href: "domains" },
-  { title: "Settings", href: "settings" },
+  { title: "Team", href: "team" },
   { title: "Billing", href: "billing" },
-  { title: "Team", href: "team" }
+  { title: "Settings", href: "settings" }
 ]
 
 interface WorkspaceLayoutProps {
@@ -30,7 +30,7 @@ export default function WorkspaceLayout({ children }: WorkspaceLayoutProps) {
           <aside className="-mx-4 lg:w-1/5">
             <SidebarNav items={sidebarNavItems} />
           </aside>
-          <div className="flex-1 lg:max-w-2xl">{children}</div>
+          <div className="flex-1 lg:max-w-5xl">{children}</div>
         </div>
       </div>
     </>

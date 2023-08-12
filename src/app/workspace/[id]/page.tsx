@@ -6,7 +6,7 @@ const Overview = (): React.ReactElement => {
       <div>
         <h3 className="text-lg font-medium">Overview</h3>
         <p className="text-sm text-muted-foreground">
-          This is a brief overview of your workspace.
+          This is a brief overview of your workspace, see the most clicked links, or other important information.
         </p>
       </div>
       <Separator />
