@@ -14,6 +14,8 @@ import type { ColumnDef } from "@tanstack/react-table";
 import { Button } from "@/lib/components/ui/button";
 import Link from "next/link";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/lib/components/ui/tooltip";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/lib/components/ui/dropdown-menu";
+import { Badge } from "@/lib/components/ui/badge";
 
 export type Link = {
   id: number;
@@ -132,16 +134,32 @@ export const linksColumns: ColumnDef<Link>[] = [
     },
   },
   { header: "Created At", accessorKey: "created_at" },
-  // actions
   {
     id: "actions",
-    header: () => <span className="sr-only">Actions</span>,
-    cell: () => (
-      <Button variant={"ghost"}>
-        <Settings className="h-4 w-4" />
-      </Button>
-    ),
     enableSorting: false,
     enableHiding: false,
+    cell: () => (
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost">
+            <Settings className="h-4 w-4" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent className="w-48">
+          <DropdownMenuItem>
+            Go to
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            Statistics
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+          Generate QR Code
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            Chat with AI&nbsp;<Badge variant="premium">Plus</Badge>
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    )
   }    
 ];

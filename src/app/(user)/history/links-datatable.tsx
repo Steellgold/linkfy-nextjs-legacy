@@ -25,7 +25,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { BarChart2, BrainCircuitIcon, Calendar, LayoutTemplate, LinkIcon, Lock, Plus, QrCode, Trash } from "lucide-react";
+import { BarChart2, BrainCircuitIcon, LayoutTemplate, LinkIcon, Plus, QrCode, Settings, Trash } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import {
@@ -34,12 +34,8 @@ import {
   ContextMenuItem,
   ContextMenuSeparator,
   ContextMenuShortcut,
-  ContextMenuSub,
-  ContextMenuSubContent,
-  ContextMenuSubTrigger,
   ContextMenuTrigger,
 } from "@/lib/components/ui/context-menu";
-import { SiAndroid, SiApple, SiIos, SiLinux, SiWindows } from "@icons-pack/react-simple-icons";
 import { Badge } from "@/lib/components/ui/badge";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/lib/components/ui/dialog";
 import { Label } from "@/lib/components/ui/label";
@@ -238,59 +234,20 @@ export const LinksTable = <TData, TValue>({
                     </Link>
                     <Link href={row.getValue("slug") + "/stats"}>
                       <ContextMenuItem className="cursor-pointer">
-                      Statistics
+                        Statistics
                         <ContextMenuShortcut>
                           <BarChart2 className="h-4 w-4 ml-2" />
                         </ContextMenuShortcut>
                       </ContextMenuItem>
                     </Link>
-                    <ContextMenuItem>
-                       Password protection
-                      <ContextMenuShortcut>
-                        <Lock className="h-4 w-4 ml-2" />
-                      </ContextMenuShortcut>
-                    </ContextMenuItem>
-                    <ContextMenuItem>
-                       Expiration date
-                      <ContextMenuShortcut>
-                        <Calendar className="h-4 w-4 ml-2" />
-                      </ContextMenuShortcut>
-                    </ContextMenuItem>
-                    <ContextMenuSub>
-                      <ContextMenuSubTrigger>Targeting</ContextMenuSubTrigger>
-                      <ContextMenuSubContent className="w-52 ml-1.5">
-                        <ContextMenuItem>
-                          Android
-                          <ContextMenuShortcut>
-                            <SiAndroid className="h-4 w-4 ml-2" />
-                          </ContextMenuShortcut>
-                        </ContextMenuItem>
-                        <ContextMenuItem>
-                          iOS
-                          <ContextMenuShortcut>
-                            <SiIos className="h-4 w-4 ml-2" />
-                          </ContextMenuShortcut>
-                        </ContextMenuItem>
-                        <ContextMenuItem>
-                          Windows
-                          <ContextMenuShortcut>
-                            <SiWindows className="h-4 w-4 ml-2" />
-                          </ContextMenuShortcut>
-                        </ContextMenuItem>
-                        <ContextMenuItem>
-                          Linux
-                          <ContextMenuShortcut>
-                            <SiLinux className="h-4 w-4 ml-2" />
-                          </ContextMenuShortcut>
-                        </ContextMenuItem>
-                        <ContextMenuItem>
-                          macOS
-                          <ContextMenuShortcut>
-                            <SiApple className="h-4 w-4 ml-2" />
-                          </ContextMenuShortcut>
-                        </ContextMenuItem>
-                      </ContextMenuSubContent>
-                    </ContextMenuSub>
+                    <Link href={row.getValue("slug") + "/settings"}>
+                      <ContextMenuItem className="cursor-pointer">
+                        Settings
+                        <ContextMenuShortcut>
+                          <Settings className="h-4 w-4 ml-2" />
+                        </ContextMenuShortcut>
+                      </ContextMenuItem>
+                    </Link>
                     <ContextMenuItem>
                       Generate QR Code
                       <ContextMenuShortcut>

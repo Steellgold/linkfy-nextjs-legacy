@@ -1,0 +1,106 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String          @id @default(uuid())
+  email          String
+  password       String
+  createdAt      DateTime        @default(now())
+  workspaces     Workspace[]
+  workspaceUsers WorkspaceUser[]
+}
+
+enum SubscriptionType {
+  FREE
+  CREATOR
+  BULK
+}
+
+model Workspace {
+  id               String           @id @default(uuid())
+  name             String
+  description      String?          @default("")
+  ownerId          String
+  owner            User             @relation(fields: [userId], references: [id])
+  subscriptionType SubscriptionType @default(FREE)
+  createdAt        DateTime         @default(now())
+  workspaceUsers   WorkspaceUser[]
+  domains          Domain[]
+  links            Link[]
+  tags             Tag[]
+  linkTreePages    LinkTreePage[]
+  userId           String
+}
+
+model WorkspaceUser {
+  workspaceId String
+  userId      String    @unique
+  workspace   Workspace @relation(fields: [workspaceId], references: [id])
+  user        User      @relation(fields: [userId], references: [id])
+  role        String
+  invitedAt   DateTime  @default(now())
+}
+
+model Domain {
+  id          String    @id @default(uuid())
+  workspaceId String
+  workspace   Workspace @relation(fields: [workspaceId], references: [id])
+  domain      String
+  links       Link[]
+}
+
+model Link {
+  id               String        @id @default(uuid())
+  shortUrl         String
+  workspaceId      String
+  workspace        Workspace     @relation(fields: [workspaceId], references: [id])
+  linkTreePageId   String?
+  linkTreePage     LinkTreePage? @relation(fields: [linkTreePageId], references: [id])
+  domainId         String?
+  domain           Domain?       @relation(fields: [domainId], references: [id])
+  tags             LinkTag[]
+  createdAt        DateTime      @default(now())
+  maxClicks        Int
+  currentClicks    Int           @default(0)
+  expirationDate   DateTime?
+  password         String?
+  errorRedirectUrl String
+  iosUrl           String
+  androidUrl       String
+}
+
+model LinkTag {
+  linkId String
+  tagId  String
+  link   Link   @relation(fields: [linkId], references: [id])
+  tag    Tag    @relation(fields: [tagId], references: [id])
+
+  @@id([linkId, tagId])
+}
+
+model Tag {
+  id          String    @id @default(uuid())
+  workspaceId String
+  workspace   Workspace @relation(fields: [workspaceId], references: [id])
+  label       String
+  links       LinkTag[]
+}
+
+model LinkTreePage {
+  id          String    @id @default(uuid())
+  title       String
+  description String
+  workspaceId String
+  workspace   Workspace @relation(fields: [workspaceId], references: [id])
+  theme       String // This can be later converted to an enum
+  links       Link[]
+}
