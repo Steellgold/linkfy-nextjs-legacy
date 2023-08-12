@@ -6,20 +6,25 @@ import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "../components/ui/button"
 
-interface SidebarNavProps extends React.HTMLAttributes<HTMLElement> {
+export type Tabs = {
   items: {
+    icon?: React.ReactNode | null
     href?: string | null
     title: string
   }[]
 }
 
-export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
+type SidebarNavProps = React.HTMLAttributes<HTMLElement> & Tabs & {
+  tab?: number | null
+}
+
+export function SidebarNav({ className, items, tab, ...props }: SidebarNavProps) {
   const pathname = usePathname()
-  const path = pathname.split("/")[3] ?? null
+  const path = pathname.split("/")[tab ?? 3] ?? null
 
   const replaceLast = (href: string): string => {
     const parts = pathname.split("/")
-    parts[3] = href
+    parts[tab ?? 3] = href
     return parts.join("/")
   }
 
@@ -39,11 +44,16 @@ export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
             buttonVariants({ variant: "ghost" }),
             (path === item.href || (path == null && items[0].href === item.href))
               ? "bg-muted hover:bg-muted"
-              : "hover:bg-transparent hover:underline",
-            "justify-start"
+              : "hover:bg-transparent",
+            "group justify-start"
           )}
         >
-          {item.title}
+          {item.icon && (
+            <span className="flex items-center justify-center w-6 h-6">
+              {item.icon}
+            </span>
+          )}&nbsp;&nbsp;        
+          <span className="group-hover:underline">{item.title}</span>
         </Link>
       ))}
     </nav>

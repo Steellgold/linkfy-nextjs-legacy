@@ -1,17 +1,20 @@
 import { buttonVariants } from "@/lib/components/ui/button"
 import { Separator } from "@/lib/components/ui/separator"
-import { SidebarNav } from "@/lib/molecules/sidebar"
+import { SidebarNav, Tabs } from "@/lib/molecules/sidebar"
+import { CaseLower, CreditCard, GalleryVertical, LinkIcon, Settings, TreePine, Users2Icon } from "lucide-react"
 import Link from "next/link"
 
-const sidebarNavItems = [
-  { title: "Overview", href: null },
-  { title: "Links", href: "links" },
-  { title: "Trees", href: "trees" },
-  { title: "Domains", href: "domains" },
-  { title: "Team", href: "team" },
-  { title: "Billing", href: "billing" },
-  { title: "Settings", href: "settings" }
-]
+const sidebarNavItems: Tabs = {
+  items: [
+    { title: "Overview", href: null, icon: <GalleryVertical className="w-5 h-5" /> },
+    { title: "Links", href: "links", icon: <LinkIcon className="w-5 h-5" /> },
+    { title: "Trees", href: "trees", icon: <TreePine className="w-5 h-5" /> },
+    { title: "Domains", href: "domains", icon: <CaseLower className="w-5 h-5" /> },
+    { title: "Team", href: "team", icon: <Users2Icon className="w-5 h-5" /> },
+    { title: "Billing", href: "billing", icon: <CreditCard className="w-5 h-5" /> },
+    { title: "Settings", href: "settings", icon: <Settings className="w-5 h-5" /> }
+  ]
+}
 
 interface WorkspaceLayoutProps {
   children: React.ReactNode
@@ -35,7 +38,7 @@ export default function WorkspaceLayout({ children }: WorkspaceLayoutProps) {
         <Separator className="my-6" />
         <div className="flex flex-col space-y-8 lg:flex-row lg:space-x-12 lg:space-y-0">
           <aside className="-mx-4 lg:w-1/5">
-            <SidebarNav items={sidebarNavItems} />
+            <SidebarNav items={sidebarNavItems.items} />
           </aside>
           <div className="flex-1 lg:max-w-5xl">{children}</div>
         </div>
