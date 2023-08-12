@@ -12,7 +12,7 @@ export const Navbar = () => {
   const { theme } = useTheme();
 
   return (
-    <nav className={cn("mx-auto mt-3 flex max-w-screen-xl items-center justify-between px-5")} suppressHydrationWarning>
+    <nav className={cn("mx-auto mt-3 flex max-w-screen-2xl items-center justify-between px-5")} suppressHydrationWarning>
       <div className="flex items-center space-x-2">
         <Link href={"/"}>
           {(theme == "dark" && (

@@ -9,6 +9,7 @@ const linksDemo: Link[] = [
     slug: "example",
     clicks: 75,
     created_at: "2021-10-10",
+    created_by: "You",
     status: "active",
     protected: false,
   },
@@ -18,6 +19,7 @@ const linksDemo: Link[] = [
     slug: "example",
     clicks: 244,
     created_at: "2021-10-10",
+    created_by: "You",
     status: "active",
     protected: false,
   },
@@ -27,6 +29,7 @@ const linksDemo: Link[] = [
     slug: "example",
     clicks: 876,
     created_at: "2021-10-10",
+    created_by: "You",
     status: "active",
     protected: true,
   },
@@ -36,6 +39,7 @@ const linksDemo: Link[] = [
     slug: "example",
     clicks: 4,
     created_at: "2021-10-10",
+    created_by: "You",
     status: "inactive",
     protected: false,
   },
@@ -45,6 +49,7 @@ const linksDemo: Link[] = [
     slug: "example",
     clicks: 6,
     created_at: "2021-10-10",
+    created_by: "You",
     status: "disabled",
     protected: false,
   },
@@ -54,6 +59,7 @@ const linksDemo: Link[] = [
     slug: "example",
     clicks: 78,
     created_at: "2021-10-10",
+    created_by: "You",
     status: "active",
     protected: true,
   },
@@ -63,6 +69,7 @@ const linksDemo: Link[] = [
     slug: "example",
     clicks: 46,
     created_at: "2021-10-10",
+    created_by: "You",
     status: "active",
     protected: false,
   },
@@ -72,6 +79,7 @@ const linksDemo: Link[] = [
     slug: "example",
     clicks: 22,
     created_at: "2021-10-10",
+    created_by: "You",
     status: "inactive",
     protected: false,
   },
@@ -81,6 +89,7 @@ const linksDemo: Link[] = [
     slug: "example",
     clicks: 6,
     created_at: "2021-10-10",
+    created_by: "You",
     status: "disabled",
     protected: false,
   },
@@ -90,6 +99,7 @@ const linksDemo: Link[] = [
     slug: "example",
     clicks: 789,
     created_at: "2021-10-10",
+    created_by: "You",
     status: "active",
     protected: true,
   },
@@ -99,6 +109,7 @@ const linksDemo: Link[] = [
     slug: "example",
     clicks: -1,
     created_at: "2021-10-10",
+    created_by: "You",
     status: "active",
     protected: false,
   },
@@ -114,7 +125,6 @@ const Links = (): React.ReactElement => {
         </p>
       </div>
       <Separator />
-      
       <LinksTable columns={linksColumns} data={linksDemo} />      
     </div>
   );

@@ -14,8 +14,6 @@ import type { ColumnDef } from "@tanstack/react-table";
 import { Button, buttonVariants } from "@/lib/components/ui/button";
 import Link from "next/link";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/lib/components/ui/tooltip";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/lib/components/ui/dropdown-menu";
-import { Badge } from "@/lib/components/ui/badge";
 
 export type Link = {
   id: number;
@@ -23,6 +21,7 @@ export type Link = {
   slug: string;
   status: "active" | "inactive" | "disabled";
   clicks: number;
+  created_by: string;
   created_at: string;
   protected: boolean;
 };
@@ -133,7 +132,8 @@ export const linksColumns: ColumnDef<Link>[] = [
       );
     },
   },
-  { header: "Created At", accessorKey: "created_at" },
+  { header: "by", accessorKey: "created_by" },
+  { header: "at", accessorKey: "created_at" },
   {
     id: "actions",
     enableSorting: false,

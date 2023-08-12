@@ -12,7 +12,7 @@ const workspaces: { title: string; description: string; href: string; default: b
 
 const Home = (): React.ReactElement => {
   return (
-    <div className="mx-auto mt-14 max-w-screen-xl">
+    <div className="mx-auto mt-14 max-w-screen-2xl">
       <div className="space-y-6 p-2 pb-16 md:block">
         <div className="space-y-0.5 flex justify-between">
           <div className="flex flex-col">
