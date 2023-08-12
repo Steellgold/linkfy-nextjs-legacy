@@ -17,7 +17,7 @@ const Home = (): React.ReactElement => {
           </div>
         </div>
         <Separator className="my-6" />
-        <div className="flex flex-col items-center justify-center space-y-6 mt-16 border border-gray-100/10 rounded-md p-10">
+        <div className="flex flex-col items-center justify-center space-y-6 mt-16 border border-gray-300 dark:border-gray-100/10 rounded-md p-10">
           <div className="flex flex-col space-y-2">
             <h3 className="text-lg font-bold tracking-tight">No workspaces</h3>
             <p className="text-muted-foreground">
