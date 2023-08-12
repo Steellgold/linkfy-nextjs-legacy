@@ -17,7 +17,6 @@ const Home = (): React.ReactElement => {
           </div>
         </div>
         <Separator className="my-6" />
-        {/* div au millieu de la page (en largeur), avec mt-16 et des bordure fine pas trop voyante, avec un padding de 10 */}
         <div className="flex flex-col items-center justify-center space-y-6 mt-16 border border-gray-100/10 rounded-md p-10">
           <div className="flex flex-col space-y-2">
             <h3 className="text-lg font-bold tracking-tight">No workspaces</h3>
