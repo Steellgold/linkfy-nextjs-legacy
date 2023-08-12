@@ -22,7 +22,6 @@ export default function RootLayout({ children }: PropsWithChildren) {
 
           <div className="relative">
             <Navbar />
-
             {children}
           </div>
         </ThemeProvider>
