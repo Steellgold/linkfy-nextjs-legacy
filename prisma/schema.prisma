@@ -17,7 +17,7 @@ enum Role {
 }
 
 model User {
-  id             String          @id @default(uuid())
+  id             String          @id @default(cuid())
   email          String
   password       String
   createdAt      DateTime        @default(now())
@@ -33,7 +33,7 @@ enum SubscriptionType {
 }
 
 model Workspace {
-  id               String           @id @default(uuid())
+  id               String           @id @default(cuid())
   name             String
   description      String?          @default("")
   ownerId          String
@@ -48,17 +48,23 @@ model Workspace {
   userId           String
 }
 
+enum WorkspaceUserRole {
+  OWNER
+  ADMIN
+  MEMBER
+}
+
 model WorkspaceUser {
   workspaceId String
-  userId      String    @unique
-  workspace   Workspace @relation(fields: [workspaceId], references: [id])
-  user        User      @relation(fields: [userId], references: [id])
-  role        String
-  invitedAt   DateTime  @default(now())
+  userId      String            @unique
+  workspace   Workspace         @relation(fields: [workspaceId], references: [id])
+  user        User              @relation(fields: [userId], references: [id])
+  role        WorkspaceUserRole @default(MEMBER)
+  invitedAt   DateTime          @default(now())
 }
 
 model Domain {
-  id          String    @id @default(uuid())
+  id          String    @id @default(cuid())
   workspaceId String
   workspace   Workspace @relation(fields: [workspaceId], references: [id])
   domain      String
@@ -66,7 +72,7 @@ model Domain {
 }
 
 model Link {
-  id               String        @id @default(uuid())
+  id               String        @id @default(cuid())
   shortUrl         String
   workspaceId      String
   workspace        Workspace     @relation(fields: [workspaceId], references: [id])
@@ -95,7 +101,7 @@ model LinkTag {
 }
 
 model Tag {
-  id          String    @id @default(uuid())
+  id          String    @id @default(cuid())
   workspaceId String
   workspace   Workspace @relation(fields: [workspaceId], references: [id])
   label       String
@@ -103,7 +109,7 @@ model Tag {
 }
 
 model LinkTreePage {
-  id          String    @id @default(uuid())
+  id          String    @id @default(cuid())
   title       String
   description String
   workspaceId String

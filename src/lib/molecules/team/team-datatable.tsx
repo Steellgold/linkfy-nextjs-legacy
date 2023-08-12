@@ -3,23 +3,20 @@
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/lib/components/ui/alert-dialog";
 import { flexRender, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, useReactTable } from "@tanstack/react-table";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/lib/components/ui/table";
-import type { ColumnDef, ColumnFiltersState, SortingState } from "@tanstack/react-table";
+import type { ColumnDef } from "@tanstack/react-table";
 import { Button, buttonVariants } from "@/lib/components/ui/button";
 import { AlertDialogTrigger } from "@radix-ui/react-alert-dialog";
-import { Input } from "@/lib/components/ui/input";
 import { useMediaQuery } from "usehooks-ts";
-import { Plus, Trash } from "lucide-react";
+import { UserMinus } from "lucide-react";
 import { useState } from "react";
-import Link from "next/link";
+import Image from "next/image";
 
 type DataTableProps<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
 };
 
-export const LinksTable = <TData, TValue>({ columns, data }: DataTableProps<TData, TValue>) => {
-  const [sorting, setSorting] = useState<SortingState>([]);
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+export const TeamTable = <TData, TValue>({ columns, data }: DataTableProps<TData, TValue>) => {
   const [rowSelection, setRowSelection] = useState({});
 
   const media = useMediaQuery("(max-width: 640px)");
@@ -29,14 +26,10 @@ export const LinksTable = <TData, TValue>({ columns, data }: DataTableProps<TDat
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
-    onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
-    onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
     onRowSelectionChange: setRowSelection,
     state: {
-      sorting,
-      columnFilters,
       rowSelection,
     },
   });
@@ -44,36 +37,17 @@ export const LinksTable = <TData, TValue>({ columns, data }: DataTableProps<TDat
   return (
     <div>
       <div className="flex items-center justify-between mb-6 space-x-2">
-        <Input
-          placeholder="Filter by URL"
-          value={(table.getColumn("url")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("url")?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm"
-        />
-
-        <div className="flex gap-2">
-          {table.getFilteredSelectedRowModel().rows.length == 0 ? (
-            <>
-              {media ? (
-                <Link href={"/"} className={buttonVariants({ variant: "default" })}><Plus className="h-4 w-4" /></Link>
-              ) : (
-                <Link href={"/"} className={buttonVariants({ variant: "default" })}>Create link</Link>
-              )}
-            </>
-          ) : null}
-
+        <div className="flex gap-2 justify-end items-center flex-1">
           {table.getFilteredSelectedRowModel().rows.length > 0 ? (
             <AlertDialog>
               <AlertDialogTrigger asChild>
                 {media ? (
                   <Button variant="destructive" size="icon" disabled={!table.getFilteredSelectedRowModel().rows.length}>
-                    <Trash className="h-4 w-4" />
+                    <UserMinus className="h-4 w-4" />
                   </Button>
                 ) : (
                   <Button variant="destructive" disabled={!table.getFilteredSelectedRowModel().rows.length}>
-                    Delete
+                    Remove
                   </Button>
                 )}
               </AlertDialogTrigger>
@@ -81,14 +55,13 @@ export const LinksTable = <TData, TValue>({ columns, data }: DataTableProps<TDat
                 <AlertDialogHeader>
                   <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
                   <AlertDialogDescription>
-                    This action cannot be undone. This will permanently delete your links, and remove them from your history. All statistics will be lost.
+                    This action cannot be undone, the user will be able to rejoin if you invite him again.
                   </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                   <AlertDialogCancel>Cancel</AlertDialogCancel>
-                  <AlertDialogAction
-                    className={buttonVariants({ variant: "destructive" })}>
-                    Delete
+                  <AlertDialogAction className={buttonVariants({ variant: "destructive" })}>
+                    Remove user
                   </AlertDialogAction>
                 </AlertDialogFooter>
               </AlertDialogContent>
@@ -104,12 +77,7 @@ export const LinksTable = <TData, TValue>({ columns, data }: DataTableProps<TDat
                 {headerGroup.headers.map((header) => {
                   return (
                     <TableHead key={header.id}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
+                      {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                     </TableHead>
                   );
                 })}
@@ -130,10 +98,8 @@ export const LinksTable = <TData, TValue>({ columns, data }: DataTableProps<TDat
             ) : (
               <TableRow>
                 <TableCell colSpan={columns.length} className="h-24 text-center">
-                  No links found, create one first in the home page.&nbsp;
-                  <Link href={"/"} className="hover:underline">
-                    click here to create one
-                  </Link>
+                  But? If there&apos;s no one, who are you? 
+                  <Image alt="wtf" src={"https://tenor.com/view/who-are-you-pierce-kavanagh-kavos-whats-your-name-tell-me-who-you-are-gif-21905697"} height={100} width={100} />
                 </TableCell>
               </TableRow>
             )}
