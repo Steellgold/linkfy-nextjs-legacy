@@ -27,7 +27,7 @@ export default function WorkspaceLayout({ children }: WorkspaceLayoutProps) {
   const media = useMediaQuery("(max-width: 640px)");
 
   return (
-    <div className="mx-auto mt-14 max-w-screen-2xl">
+    <div className="px-4 mx-auto mt-14 max-w-screen-2xl">
       <div className="space-y-6 p-2 pb-16 md:block">
         <div className="space-y-0.5 flex justify-between">
           <div className="flex flex-col">

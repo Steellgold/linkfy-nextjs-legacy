@@ -25,6 +25,11 @@ export function SidebarNav({ className, items, tab, ...props }: SidebarNavProps)
   const replaceLast = (href: string): string => {
     const parts = pathname.split("/")
     parts[tab ?? 3] = href
+
+    if (parts.length > (tab ?? 3) + 1) {
+      parts.splice(4, parts.length - 4)
+    }
+
     return parts.join("/")
   }
 
