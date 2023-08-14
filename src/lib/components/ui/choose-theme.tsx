@@ -12,7 +12,7 @@ export const ChooseTheme = (): React.ReactElement => {
   return (
     <Button
       variant="ghost"
-      size="icon"
+      size="sm"
       onClick={() => {
         setTheme(theme === "dark" ? "light" : "dark");
       }}
