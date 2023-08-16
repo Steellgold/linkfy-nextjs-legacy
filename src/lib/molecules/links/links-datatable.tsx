@@ -1,53 +1,23 @@
 "use client";
 
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "@/lib/components/ui/alert-dialog";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/lib/components/ui/alert-dialog";
+import { flexRender, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, useReactTable } from "@tanstack/react-table";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/lib/components/ui/table";
+import type { ColumnDef, ColumnFiltersState, SortingState } from "@tanstack/react-table";
 import { Button, buttonVariants } from "@/lib/components/ui/button";
-import { Input } from "@/lib/components/ui/input";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/lib/components/ui/table";
 import { AlertDialogTrigger } from "@radix-ui/react-alert-dialog";
-import type {
-  ColumnDef,
-  ColumnFiltersState,
-  SortingState,
-} from "@tanstack/react-table";
-import {
-  flexRender,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
-import { Plus, Trash } from "lucide-react";
-import Link from "next/link";
-import { useState } from "react";
+import { Input } from "@/lib/components/ui/input";
 import { useMediaQuery } from "usehooks-ts";
+import { Plus, Trash } from "lucide-react";
+import { useState } from "react";
+import Link from "next/link";
 
 type DataTableProps<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
 };
 
-export const LinksTable = <TData, TValue>({
-  columns,
-  data,
-}: DataTableProps<TData, TValue>) => {
+export const LinksTable = <TData, TValue>({ columns, data }: DataTableProps<TData, TValue>) => {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [rowSelection, setRowSelection] = useState({});
@@ -72,7 +42,7 @@ export const LinksTable = <TData, TValue>({
   });
 
   return (
-    <div className="w-full">
+    <div>
       <div className="flex items-center justify-between mb-6 space-x-2">
         <Input
           placeholder="Filter by URL"
@@ -87,13 +57,9 @@ export const LinksTable = <TData, TValue>({
           {table.getFilteredSelectedRowModel().rows.length == 0 ? (
             <>
               {media ? (
-                <Link href={"/"} className={buttonVariants({ variant: "default" })}>
-                  <Plus className="h-4 w-4" />
-                </Link>
+                <Link href={"/"} className={buttonVariants({ variant: "default" })}><Plus className="h-4 w-4" /></Link>
               ) : (
-                <Link href={"/"} className={buttonVariants({ variant: "default" })}>
-                  Create link
-                </Link>
+                <Link href={"/"} className={buttonVariants({ variant: "default" })}>Create link</Link>
               )}
             </>
           ) : null}
@@ -102,18 +68,11 @@ export const LinksTable = <TData, TValue>({
             <AlertDialog>
               <AlertDialogTrigger asChild>
                 {media ? (
-                  <Button
-                    variant="destructive"
-                    size="icon"
-                    disabled={!table.getFilteredSelectedRowModel().rows.length}
-                  >
+                  <Button variant="destructive" size="icon" disabled={!table.getFilteredSelectedRowModel().rows.length}>
                     <Trash className="h-4 w-4" />
                   </Button>
                 ) : (
-                  <Button
-                    variant="destructive"
-                    disabled={!table.getFilteredSelectedRowModel().rows.length}
-                  >
+                  <Button variant="destructive" disabled={!table.getFilteredSelectedRowModel().rows.length}>
                     Delete
                   </Button>
                 )}
@@ -122,16 +81,13 @@ export const LinksTable = <TData, TValue>({
                 <AlertDialogHeader>
                   <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
                   <AlertDialogDescription>
-                    This action cannot be undone. This will permanently delete your
-                    links, and remove them from your history. All statistics will be
-                    lost.
+                    This action cannot be undone. This will permanently delete your links, and remove them from your history. All statistics will be lost.
                   </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                   <AlertDialogCancel>Cancel</AlertDialogCancel>
                   <AlertDialogAction
-                    className={buttonVariants({ variant: "destructive" })}
-                  >
+                    className={buttonVariants({ variant: "destructive" })}>
                     Delete
                   </AlertDialogAction>
                 </AlertDialogFooter>
@@ -163,10 +119,7 @@ export const LinksTable = <TData, TValue>({
           <TableBody>
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                >
+                <TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -195,20 +148,10 @@ export const LinksTable = <TData, TValue>({
           </div>
         </div>
         <div className="flex space-x-2">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => void table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
-          >
+          <Button variant="outline" size="sm" onClick={() => void table.previousPage()} disabled={!table.getCanPreviousPage()}>
             Previous
           </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => void table.nextPage()}
-            disabled={!table.getCanNextPage()}
-          >
+          <Button variant="outline" size="sm" onClick={() => void table.nextPage()} disabled={!table.getCanNextPage()}>
             Next
           </Button>
         </div>

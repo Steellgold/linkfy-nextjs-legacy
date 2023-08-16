@@ -1,10 +1,4 @@
-import {
-  Dashboard,
-  DashboardContent,
-  DashboardDescription,
-  DashboardHeader,
-  DashboardTitle,
-} from "@/lib/features/layout/app/Dashboard";
+import { Separator } from "@/lib/components/ui/separator";
 import { LinksTable } from "@/lib/molecules/links/links-datatable";
 import { Link, linksColumns } from "@/lib/molecules/links/links-datatable.type";
 
@@ -123,19 +117,17 @@ const linksDemo: Link[] = [
 
 const Links = (): React.ReactElement => {
   return (
-    <Dashboard>
-      <DashboardHeader>
-        <DashboardTitle>Links</DashboardTitle>
-      </DashboardHeader>
-      <DashboardDescription>
-        Your links that you have generated will be displayed here, you can delete or
-        modify them whenever you want
-      </DashboardDescription>
-      <DashboardContent>
-        <LinksTable columns={linksColumns} data={linksDemo} />
-      </DashboardContent>
-    </Dashboard>
+    <div className="space-y-6">
+      <div>
+        <h3 className="text-lg font-medium">Links</h3>
+        <p className="text-sm text-muted-foreground">
+          Your links that you have generated will be displayed here, you can delete or modify them whenever you want
+        </p>
+      </div>
+      <Separator />
+      <LinksTable columns={linksColumns} data={linksDemo} />      
+    </div>
   );
 };
 
-export default Links;
+export default Links
