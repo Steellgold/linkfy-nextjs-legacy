@@ -11,6 +11,8 @@ export { metadata } from "@/lib/configs/metadata";
 
 const os = Open_Sans({ subsets: ["latin"] });
 
+export const revalidate = 0;
+
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en" suppressHydrationWarning>

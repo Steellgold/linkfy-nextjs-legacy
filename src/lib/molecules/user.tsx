@@ -1,12 +1,13 @@
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/lib/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/lib/components/ui/avatar";
 import Link from "next/link";
 import React, { ReactElement } from "react";
 import { buttonVariants } from "../components/ui/button";
+import { cookies } from "next/headers";
 
 export const User = async(): Promise<ReactElement> => {
-  const supabase = createClientComponentClient();
+  const supabase = createServerComponentClient({ cookies });
   const { data: { user } } = await supabase.auth.getUser();
 
   return (
@@ -15,7 +16,9 @@ export const User = async(): Promise<ReactElement> => {
         <DropdownMenu>
           <DropdownMenuTrigger>
             {user.user_metadata.avatar_url ? (
-              <AvatarImage src={user.user_metadata.avatar_url} alt={user.user_metadata.full_name} />
+              <Avatar>
+                <AvatarImage src={user.user_metadata.avatar_url} alt={user.user_metadata.full_name} />
+              </Avatar>
             ) : (
               <Avatar>
                 <AvatarFallback>

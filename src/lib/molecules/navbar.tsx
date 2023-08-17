@@ -1,5 +1,3 @@
-"use client";
-
 import { buttonVariants } from "@/lib/components/ui/button";
 import { ChooseTheme } from "@/lib/components/ui/choose-theme";
 import { cn } from "@/lib/utils";
