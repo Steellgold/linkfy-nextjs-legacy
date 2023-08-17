@@ -10,21 +10,21 @@ export const Providers = () => {
     <div className="flex space-x-2">
       <Button className="w-full flex gap-1" onClick={() => supabase.auth.signInWithOAuth({
         provider: "google",
-        options: { redirectTo: process.env.NEXT_PUBLIC_REDIRECT_TO }
+        options: { redirectTo: `${location.origin}/auth/callback` }
       })}>
         <SiGoogle size={20} />
       </Button>
 
       <Button className="w-full flex gap-1" onClick={() => supabase.auth.signInWithOAuth({
         provider: "github",
-        options: { redirectTo: process.env.NEXT_PUBLIC_REDIRECT_TO }
+        options: { redirectTo: `${location.origin}/auth/callback` }
       })}>
         <SiGithub size={20} />
       </Button>
 
       <Button className="w-full flex gap-1" onClick={() => supabase.auth.signInWithOAuth({
         provider: "discord",
-        options: { redirectTo: process.env.NEXT_PUBLIC_REDIRECT_TO }
+        options: { redirectTo: `${location.origin}/auth/callback` }
       })}>
         <SiDiscord size={20} />
       </Button>
