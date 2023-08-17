@@ -8,7 +8,7 @@ import { User } from "./user";
 
 export const Navbar = (): ReactElement => {
   return (
-    <nav className={cn("mx-auto mt-3 flex max-w-screen-2xl items-center justify-between px-5")} suppressHydrationWarning>
+    <nav className={cn("mx-auto mt-3 flex max-w-screen-lg items-center justify-between px-5")} suppressHydrationWarning>
       <div className="flex items-center space-x-2">
         <Icon />
       </div>

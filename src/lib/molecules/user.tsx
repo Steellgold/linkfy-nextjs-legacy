@@ -1,10 +1,11 @@
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/lib/components/ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/lib/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/lib/components/ui/avatar";
-import Link from "next/link";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { Button, buttonVariants } from "../components/ui/button";
 import React, { ReactElement } from "react";
-import { buttonVariants } from "../components/ui/button";
 import { cookies } from "next/headers";
+import Link from "next/link";
+import { Logout } from "./logout";
 
 export const User = async(): Promise<ReactElement> => {
   const supabase = createServerComponentClient({ cookies });
@@ -15,23 +16,36 @@ export const User = async(): Promise<ReactElement> => {
       {user && (
         <DropdownMenu>
           <DropdownMenuTrigger>
-            {user.user_metadata.avatar_url ? (
-              <Avatar>
-                <AvatarImage src={user.user_metadata.avatar_url} alt={user.user_metadata.full_name} />
-              </Avatar>
-            ) : (
-              <Avatar>
-                <AvatarFallback>
-                  {user.user_metadata.full_name.split(" ").map((name: string) => name[0]).join("")}
-                </AvatarFallback>
-              </Avatar>
-            )}
+            <Button variant={"outline"}>
+              {user.user_metadata.avatar_url ? (
+                <Avatar className="h-5 w-5">
+                  <AvatarImage src={user.user_metadata.avatar_url} alt={user.user_metadata.full_name} width={8} height={8} />
+                  <AvatarFallback>{user.user_metadata.full_name.split(" ").map((name: string) => name[0]).join("")}</AvatarFallback>
+                </Avatar>
+              ) : (
+                <Avatar>
+                  <AvatarFallback>
+                    {user.user_metadata.full_name.split(" ").map((name: string) => name[0]).join("")}
+                  </AvatarFallback>
+                </Avatar>
+              )}
+
+              <span className="ml-2">{user.user_metadata.full_name}</span>
+            </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuLabel>Settings</DropdownMenuLabel>
+          <DropdownMenuContent className="w-32">
+            <Link href={"/workspaces"}>
+              <DropdownMenuItem className="cursor-pointer">
+                Workspaces
+              </DropdownMenuItem>
+            </Link>
+            <Link href={"/pricing"}>
+              <DropdownMenuItem className="cursor-pointer">
+                Subscription
+              </DropdownMenuItem>
+            </Link>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Workspaces</DropdownMenuItem>
-            <DropdownMenuItem>Subscription</DropdownMenuItem>
+            <Logout />
           </DropdownMenuContent>
         </DropdownMenu>
       )}
