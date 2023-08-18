@@ -24,7 +24,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
           <ThemeProvider attribute="class" defaultTheme="dark">
             <HomeLayoutGradient />
 
-            <div className="relative">
+            <div>
               <Navbar />
               {children}
             </div>

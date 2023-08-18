@@ -19,7 +19,9 @@ type SidebarNavProps = React.HTMLAttributes<HTMLElement> & Tabs & {
 }
 
 export function SidebarNav({ className, items, tab, ...props }: SidebarNavProps) {
-  const pathname = usePathname()
+  const pathname = usePathname();
+  if (!pathname) return null;
+  
   const path = pathname.split("/")[tab ?? 3] ?? null
 
   const replaceLast = (href: string): string => {

@@ -1,11 +1,11 @@
 import { Typography } from "@/lib/components/ui/Typography";
-import { OrDivider } from "../OrDivider";
+import { Divider } from "../../../lib/components/ui/divider";
 import { Socials } from "../Socials";
 import { SignInCredentialsAndMagicLinkForm } from "./SignInCredentialsAndMagicLinkForm";
 
 export const metadata = {
-  title: "Sign In - Cube",
-  description: "Page description",
+  title: "Sign in",
+  description: "Sign in to your Linkfy account.",
 };
 
 export default function SignIn() {
@@ -21,12 +21,12 @@ export default function SignIn() {
         {/* Form */}
         <div className="max-w-sm mx-auto">
           <SignInCredentialsAndMagicLinkForm />
-          <OrDivider />
+          <Divider />
           <Socials />
           <div className="text-center mt-6">
             <Typography variant="small">
               Don't you have an account?{" "}
-              <Typography variant="link" as="a" href="/signup">
+              <Typography variant="link" as="a" href="/sign-up">
                 Get Started
               </Typography>
             </Typography>

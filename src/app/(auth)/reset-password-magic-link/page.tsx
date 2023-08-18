@@ -1,10 +1,10 @@
 import { Typography } from "@/lib/components/ui/Typography";
 import Link from "next/link";
-import { MagicLinkForm } from "../signin/MagicLinkForm";
+import { MagicLinkForm } from "../sign-in/MagicLinkForm";
 
 export const metadata = {
-  title: "Reset Password - Cube",
-  description: "Page description",
+  title: "Reset the password",
+  description: "Fill the form to reset your password with a magic link.",
 };
 
 export default function ResetPassword() {
@@ -23,23 +23,13 @@ export default function ResetPassword() {
             title="Reset password via Magic Link"
             redirectUrl="reset-password"
           />
-          <Typography as="div" variant="muted">
-            <p>To reset your password, please follow these steps:</p>
-            <ol>
-              <li>Enter your email to receive a magic link.</li>
-              <li>Check your inbox for a magic link.</li>
-              <li>Click on the magic link to log in securely.</li>
-              <li>Once logged in, you can update your password.</li>
-            </ol>
-          </Typography>
-          <div className="mt-6">
-            <Typography variant="small">
-              Don't have an account ?{" "}
-              <Typography variant="link" as={Link} href="/signup">
-                Get Started
-              </Typography>
+          
+          <Typography variant="small">
+            Don't have an account ?{" "}
+            <Typography variant="link" as={Link} href="/sign-up">
+              Get Started
             </Typography>
-          </div>
+          </Typography>
         </div>
       </div>
     </div>

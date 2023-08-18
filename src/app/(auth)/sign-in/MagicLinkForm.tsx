@@ -12,7 +12,7 @@ import {
 } from "@/lib/components/ui/form";
 import { Input } from "@/lib/components/ui/input";
 import { signIn } from "next-auth/react";
-import { Button } from "react-day-picker";
+import { Button } from "@/lib/components/ui/button";
 import { z } from "zod";
 
 const MagicLinkFormScheme = z.object({
@@ -21,13 +21,7 @@ const MagicLinkFormScheme = z.object({
 
 type MagicLinkFormType = z.infer<typeof MagicLinkFormScheme>;
 
-export const MagicLinkForm = ({
-  redirectUrl,
-  title = "Login with Magic Link",
-}: {
-  redirectUrl?: string;
-  title?: string;
-}) => {
+export const MagicLinkForm = ({ redirectUrl, title = "Login with Magic Link" }: { redirectUrl?: string; title?: string; }) => {
   const form = useZodForm({
     schema: MagicLinkFormScheme,
   });

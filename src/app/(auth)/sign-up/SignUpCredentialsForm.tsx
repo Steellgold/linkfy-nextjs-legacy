@@ -1,6 +1,7 @@
 "use client";
 
 import { Alert, AlertTitle } from "@/lib/components/ui/alert";
+import { Button } from "@/lib/components/ui/button";
 import {
   Form,
   FormControl,
@@ -14,7 +15,6 @@ import { Input } from "@/lib/components/ui/input";
 import { AlertTriangle } from "lucide-react";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
-import { Button } from "react-day-picker";
 import { z } from "zod";
 
 const LoginCredentialsFormScheme = z.object({
@@ -104,7 +104,7 @@ export const SignUpCredentialsForm = ({
         name="verifyPassword"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Verify Password</FormLabel>
+            <FormLabel>Confirm password</FormLabel>
             <FormControl>
               <Input type="password" {...field} />
             </FormControl>
@@ -121,7 +121,7 @@ export const SignUpCredentialsForm = ({
       )}
 
       <Button type="submit" className="w-full">
-        Submit
+        Let&apos;s start
       </Button>
     </Form>
   );

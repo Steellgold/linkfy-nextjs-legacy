@@ -1,13 +1,13 @@
 import { Typography } from "@/lib/components/ui/Typography";
-import { Link } from "lucide-react";
-import { OrDivider } from "../OrDivider";
+import { Divider } from "../../../lib/components/ui/divider";
 import { Socials } from "../Socials";
 import { SignUpCredentialsForm } from "./SignUpCredentialsForm";
 import { createAccount } from "./signup.action";
+import Link from "next/link";
 
 export const metadata = {
-  title: "Sign In - Cube",
-  description: "Page description",
+  title: "Sign up",
+  description: "Create an account on Linkfy to start sharing and shortening links.",
 };
 
 export default function SignIn() {
@@ -23,12 +23,12 @@ export default function SignIn() {
         {/* Form */}
         <div className="max-w-sm mx-auto">
           <SignUpCredentialsForm createAccount={createAccount} />
-          <OrDivider />
+          <Divider />
           <Socials />
           <div className="text-center mt-6">
             <Typography>
               Have an account ?{" "}
-              <Typography variant="link" as={Link} href="/signin">
+              <Typography variant="link" as={Link} href="/sign-in">
                 Login
               </Typography>
             </Typography>

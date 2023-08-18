@@ -1,8 +1,8 @@
 import { Typography } from "@/lib/components/ui/Typography";
 
 export const metadata = {
-  title: "Sign In - Cube",
-  description: "Page description",
+  title: "Check your email",
+  description: "A sign in link has been sent to your email address.",
 };
 
 export default function SignIn() {

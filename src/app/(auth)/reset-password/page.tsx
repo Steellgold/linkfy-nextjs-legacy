@@ -1,10 +1,10 @@
 import { Typography } from "@/lib/components/ui/Typography";
 import Link from "next/link";
-import { MagicLinkForm } from "../signin/MagicLinkForm";
+import { MagicLinkForm } from "../sign-in/MagicLinkForm";
 
 export const metadata = {
-  title: "Reset Password - Cube",
-  description: "Page description",
+  title: "Reset Password",
+  description: "Fill the form to reset your password.",
 };
 
 export default function ResetPassword() {

@@ -13,8 +13,9 @@ import {
   useZodForm,
 } from "@/lib/components/ui/form";
 import { Input } from "@/lib/components/ui/input";
-import { AlertTriangle, Link } from "lucide-react";
+import { AlertTriangle } from "lucide-react";
 import { SignInResponse, signIn } from "next-auth/react";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
 import { useLocalStorage } from "usehooks-ts";
