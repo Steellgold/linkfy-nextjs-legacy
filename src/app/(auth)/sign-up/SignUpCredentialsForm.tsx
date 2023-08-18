@@ -37,7 +37,7 @@ export const SignUpCredentialsForm = ({
   const [error, setError] = useState("");
 
   async function onSubmit(values: LoginCredentialsFormType) {
-    if (values.password !== values.verifyPassword) {
+    if (values.passwordHash !== values.verifyPassword) {
       form.setError("verifyPassword", {
         message: "Password does not match",
       });
@@ -52,7 +52,7 @@ export const SignUpCredentialsForm = ({
 
     await signIn("credentials", {
       email: values.email,
-      password: values.password,
+      password: values.passwordHash,
 
       callbackUrl: `${window.location.origin}/`,
     });

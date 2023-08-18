@@ -51,7 +51,7 @@ export const SignInCredentialsAndMagicLinkForm = () => {
     if (isWithPassword) {
       result = await signIn("credentials", {
         email: values.email,
-        password: values.password,
+        password: values.passwordHash,
         callbackUrl: `${window.location.origin}/`,
       });
     } else {

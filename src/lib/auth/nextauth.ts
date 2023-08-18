@@ -41,11 +41,12 @@ export const authOptions: (req?: NextApiRequest, res?: NextApiResponse) => AuthO
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        if (!credentials || !credentials.email || !credentials.password) return null;
+        if (!credentials || !credentials.email || !credentials.passwordHash)
+          return null;
 
         // Add logic here to look up the user from the credentials supplied
         const passwordHash = hashStringWithSalt(
-          credentials.password,
+          credentials.passwordHash,
           env.NEXTAUTH_SECRET
         );
 
