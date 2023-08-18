@@ -67,7 +67,7 @@ model Workspace {
   name             String
   description      String?          @default("")
   ownerId          String
-  owner            User             @relation(fields: [userId], references: [id])
+  owner            User             @relation(fields: [ownerId], references: [id])
   subscriptionType SubscriptionType @default(FREE)
   createdAt        DateTime         @default(now())
   workspaceUsers   WorkspaceUser[]
@@ -75,7 +75,6 @@ model Workspace {
   links            Link[]
   tags             Tag[]
   linkTreePages    LinkTreePage[]
-  userId           String
 }
 
 enum WorkspaceUserRole {
@@ -112,13 +111,13 @@ model Link {
   domain           Domain?       @relation(fields: [domainId], references: [id])
   tags             LinkTag[]
   createdAt        DateTime      @default(now())
-  maxClicks        Int
+  maxClicks        Int?
   currentClicks    Int           @default(0)
   expirationDate   DateTime?
   password         String?
-  errorRedirectUrl String
-  iosUrl           String
-  androidUrl       String
+  errorRedirectUrl String?
+  iosUrl           String?
+  androidUrl       String?
 }
 
 model LinkTag {
