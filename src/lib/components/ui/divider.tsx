@@ -1,4 +1,4 @@
-import { Typography } from "@/lib/components/ui/Typography";
+import { Typography } from "@/lib/components/ui/typography";
 import { Separator } from "@/lib/components/ui/separator";
 
 type DividerProps = {

@@ -5,6 +5,7 @@ import { AuthOptions, getServerSession } from "next-auth";
 import { decode, encode } from "next-auth/jwt";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GitHubProvider from "next-auth/providers/github";
+// import GoogleProvider from "next-auth/providers/google";
 import { redirect } from "next/navigation";
 import { v4 as uuidv4 } from "uuid";
 import { prisma } from "../database/prisma";
@@ -17,10 +18,7 @@ const tokenName =
     ? "next-auth.session-token"
     : "__Secure-next-auth.session-token";
 
-export const authOptions: (
-  req?: NextApiRequest,
-  res?: NextApiResponse
-) => AuthOptions = (req, res) => ({
+export const authOptions: (req?: NextApiRequest, res?: NextApiResponse) => AuthOptions = (req, res) => ({
   adapter: PrismaAdapter(prisma),
   // session: {
   //   strategy: 'jwt',
@@ -83,7 +81,6 @@ export const authOptions: (
       return session;
     },
     async signIn({ user }) {
-      // Check if this sign in callback is being called in the credentials authentication flow. If so, use the next-auth adapter to create a session entry in the database (SignIn is called after authorize so we can safely assume the user is valid and already authenticated).
       if (!req || !res) return true;
       if (
         req.query.nextauth?.includes("callback") &&
@@ -92,13 +89,11 @@ export const authOptions: (
       ) {
         if (user) {
           const uuid = uuidv4();
-          // + 7 days
           const expireAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
           await prisma.session.create({
             data: {
               sessionToken: uuid,
               userId: user.id,
-              // expires in 2 weeks
               expires: expireAt,
               accessToken: uuid,
             },
@@ -108,12 +103,10 @@ export const authOptions: (
             secure: process.env.NODE_ENV === "production",
           });
 
-          const maxAge = 7 * 24 * 60 * 60; // 7 jours en secondes
+          const maxAge = 7 * 24 * 60 * 60;
 
           cookie.set(tokenName, uuid, {
             maxAge,
-            // expires: expireAt,
-            // httpOnly: true,
             secure: env.NODE_ENV === "production",
             sameSite: "lax",
             path: "/",
@@ -130,7 +123,6 @@ export const authOptions: (
       return token;
     },
   },
-  //needs to override default jwt behavior when using Credentials
   jwt: {
     encode(params) {
       if (!req || !res) {
@@ -146,7 +138,6 @@ export const authOptions: (
         if (cookie) return cookie;
         else return "";
       }
-      // Revert to default behaviour when not in the credentials provider callback flow
       return encode(params);
     },
     async decode(params) {
@@ -171,8 +162,8 @@ export const authOptions: (
     },
   },
   pages: {
-    signIn: "/signin",
-    signOut: "/signout",
+    signIn: "/sign-in",
+    signOut: "/sign-out",
     verifyRequest: "/verify-request",
   },
 });
@@ -187,9 +178,7 @@ export const getAuthSession = async (...parameters: ParametersGetServerSession) 
   return session;
 };
 
-export const getRequiredAuthSession = async (
-  ...parameters: ParametersGetServerSession
-) => {
+export const getRequiredAuthSession = async (...parameters: ParametersGetServerSession) => {
   const session = await getAuthSession(...parameters);
   if (!session?.user?.id) {
     redirect("/login");

@@ -1,6 +1,6 @@
 "use client";
 
-import { Typography } from "@/lib/components/ui/Typography";
+import { Typography } from "@/lib/components/ui/typography";
 import { Button } from "@/lib/components/ui/button";
 import {
   Form,

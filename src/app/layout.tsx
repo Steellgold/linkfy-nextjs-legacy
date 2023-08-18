@@ -1,5 +1,4 @@
 /* eslint-disable camelcase */
-import { HomeLayoutGradient } from "@/lib/components/layout/gradient";
 import { ThemeProvider } from "@/lib/components/theme-provider";
 import { Navbar } from "@/lib/molecules/navbar";
 import { cn } from "@/lib/utils";
@@ -22,12 +21,8 @@ export default function RootLayout({ children }: PropsWithChildren) {
 
         <Providers>
           <ThemeProvider attribute="class" defaultTheme="dark">
-            <HomeLayoutGradient />
-
-            <div>
-              <Navbar />
-              {children}
-            </div>
+            <Navbar />
+            {children}
           </ThemeProvider>
         </Providers>
       </body>

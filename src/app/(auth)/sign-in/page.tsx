@@ -1,4 +1,4 @@
-import { Typography } from "@/lib/components/ui/Typography";
+import { Typography } from "@/lib/components/ui/typography";
 import { Divider } from "../../../lib/components/ui/divider";
 import { Socials } from "../Socials";
 import { SignInCredentialsAndMagicLinkForm } from "./SignInCredentialsAndMagicLinkForm";

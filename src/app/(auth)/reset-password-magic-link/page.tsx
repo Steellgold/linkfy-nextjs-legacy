@@ -1,4 +1,4 @@
-import { Typography } from "@/lib/components/ui/Typography";
+import { Typography } from "@/lib/components/ui/typography";
 import Link from "next/link";
 import { MagicLinkForm } from "../sign-in/MagicLinkForm";
 

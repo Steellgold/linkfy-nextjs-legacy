@@ -1,4 +1,4 @@
-import { Typography } from "@/lib/components/ui/Typography";
+import { Typography } from "@/lib/components/ui/typography";
 
 export const metadata = {
   title: "Check your email",
