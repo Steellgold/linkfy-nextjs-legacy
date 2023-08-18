@@ -10,7 +10,7 @@ const shrikhand = Shrikhand({ subsets: ["latin"],weight: "400" });
 const Header = (): ReactElement => {
   return (
     <div className="flex flex-col items-center justify-center mt-10 md:mt-16 px-3">
-      <h1 className={cn(outfit.className, "text-5xl font-bold flex flex-col items-center justify-center")}>
+      <h1 className={cn(outfit.className, "text-3xl md:text-5xl font-bold flex flex-col items-center justify-center")}>
         <span>A shortener tool</span>
         <span>for <TypeAnimation
           repeat={Infinity}
