@@ -19,7 +19,10 @@ export default function ResetPassword() {
         </div>
         {/* Form */}
         <div className="max-w-sm mx-auto flex flex-col gap-6">
-          <MagicLinkForm />
+          <MagicLinkForm
+            title="Reset password via Magic Link"
+            redirectUrl="reset-password"
+          />
           <Typography as="div" variant="muted">
             <p>To reset your password, please follow these steps:</p>
             <ol>
