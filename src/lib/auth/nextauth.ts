@@ -159,6 +159,14 @@ export const authOptions: (req?: NextApiRequest, res?: NextApiResponse) => AuthO
   events: {
     createUser: async ({ user }) => {
       // Create a stripe customer for the user with their email address
+      prisma.workspace.create({
+        data: {
+          name: `${user.name}'s Workspace`,
+          ownerId: user.id,
+          createdAt: new Date(),
+          description: "This is your personal workspace where you can manage and organize your shortened links."
+        }
+      })
       await setupStripeCustomer(user);
     },
   },
