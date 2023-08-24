@@ -1,11 +1,11 @@
 /* eslint-disable camelcase */
-import { HomeLayoutGradient } from "@/lib/components/layout/gradient";
 import { ThemeProvider } from "@/lib/components/theme-provider";
 import { Navbar } from "@/lib/molecules/navbar";
 import { cn } from "@/lib/utils";
 import { Analytics } from "@vercel/analytics/react";
 import { Open_Sans } from "next/font/google";
 import { PropsWithChildren } from "react";
+import { Providers } from "./provider";
 import "./tailwind.css";
 export { metadata } from "@/lib/configs/metadata";
 
@@ -19,14 +19,12 @@ export default function RootLayout({ children }: PropsWithChildren) {
       <body className={cn("bg-white dark:bg-[#09090b]", os.className)}>
         <Analytics />
 
-        <ThemeProvider attribute="class" defaultTheme="dark">
-          <HomeLayoutGradient />
-
-          <div className="relative">
+        <Providers>
+          <ThemeProvider attribute="class" defaultTheme="dark">
             <Navbar />
             {children}
-          </div>
-        </ThemeProvider>
+          </ThemeProvider>
+        </Providers>
       </body>
     </html>
   );

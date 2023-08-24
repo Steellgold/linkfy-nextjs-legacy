@@ -14,19 +14,9 @@ import type { ColumnDef } from "@tanstack/react-table";
 import { Button, buttonVariants } from "@/lib/components/ui/button";
 import Link from "next/link";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/lib/components/ui/tooltip";
+import type { Link as ILink } from "@prisma/client";
 
-export type Link = {
-  id: number;
-  url: string;
-  slug: string;
-  status: "active" | "inactive" | "disabled";
-  clicks: number;
-  created_by: string;
-  created_at: string;
-  protected: boolean;
-};
-
-export const linksColumns: ColumnDef<Link>[] = [
+export const linksColumns: ColumnDef<ILink>[] = [
   {
     id: "select",
     header: ({ table }) => (
