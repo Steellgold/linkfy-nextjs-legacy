@@ -1,0 +1,148 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id                       String  @id @default(cuid())
+  type                     String
+  provider                 String
+  providerAccountId        String
+  refresh_token            String? @db.Text
+  access_token             String? @db.Text
+  expires_at               Int?
+  token_type               String?
+  scope                    String?
+  id_token                 String? @db.Text
+  session_state            String?
+  refresh_token_expires_in Int?
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  expires      DateTime
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id               String    @id @default(cuid())
+  name             String?
+  email            String?   @unique
+  passwordHash     String?
+  stripeCustomerId String?
+  emailVerified    DateTime?
+  image            String?
+
+  accounts Account[]
+  sessions Session[]
+
+  Workspace     Workspace[]
+  WorkspaceUser WorkspaceUser?
+}
+
+enum SubscriptionType {
+  FREE
+  CREATOR
+  BULK
+}
+
+model Workspace {
+  id               String           @id @default(cuid())
+  name             String
+  description      String?          @default("")
+  ownerId          String
+  owner            User             @relation(fields: [ownerId], references: [id])
+  subscriptionType SubscriptionType @default(FREE)
+  createdAt        DateTime         @default(now())
+  workspaceUsers   WorkspaceUser[]
+  domains          Domain[]
+  links            Link[]
+  tags             Tag[]
+  linkTreePages    LinkTreePage[]
+}
+
+enum WorkspaceUserRole {
+  OWNER
+  ADMIN
+  MEMBER
+}
+
+model WorkspaceUser {
+  workspaceId String
+  userId      String            @unique
+  workspace   Workspace         @relation(fields: [workspaceId], references: [id])
+  user        User              @relation(fields: [userId], references: [id])
+  role        WorkspaceUserRole @default(MEMBER)
+  invitedAt   DateTime          @default(now())
+}
+
+model Domain {
+  id          String    @id @default(cuid())
+  workspaceId String
+  workspace   Workspace @relation(fields: [workspaceId], references: [id])
+  domain      String
+  links       Link[]
+}
+
+model Link {
+  id               String        @id @default(cuid())
+  shortUrl         String
+  url              String
+  workspaceId      String
+  workspace        Workspace     @relation(fields: [workspaceId], references: [id])
+  linkTreePageId   String?
+  linkTreePage     LinkTreePage? @relation(fields: [linkTreePageId], references: [id])
+  domainId         String?
+  domain           Domain?       @relation(fields: [domainId], references: [id])
+  tags             LinkTag[]
+  createdAt        DateTime      @default(now())
+  maxClicks        Int?
+  currentClicks    Int           @default(0)
+  expirationDate   DateTime?
+  password         String?
+  errorRedirectUrl String?
+  iosUrl           String?
+  androidUrl       String?
+}
+
+model LinkTag {
+  linkId String
+  tagId  String
+  link   Link   @relation(fields: [linkId], references: [id])
+  tag    Tag    @relation(fields: [tagId], references: [id])
+
+  @@id([linkId, tagId])
+}
+
+model Tag {
+  id          String    @id @default(cuid())
+  workspaceId String
+  workspace   Workspace @relation(fields: [workspaceId], references: [id])
+  label       String
+  links       LinkTag[]
+}
+
+model LinkTreePage {
+  id          String    @id @default(cuid())
+  title       String
+  description String
+  workspaceId String
+  workspace   Workspace @relation(fields: [workspaceId], references: [id])
+  theme       String // This can be later converted to an enum
+  links       Link[]
+}

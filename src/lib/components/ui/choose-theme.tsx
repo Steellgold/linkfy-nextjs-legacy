@@ -2,11 +2,10 @@
 
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
-import * as React from "react";
-
 import { Button } from "@/lib/components/ui/button";
+import { ReactElement } from "react";
 
-export const ChooseTheme = (): React.ReactElement => {
+export const ChooseTheme = (): ReactElement => {
   const { setTheme, theme } = useTheme();
 
   return (

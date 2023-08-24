@@ -11,21 +11,12 @@ import {
 } from "lucide-react";
 import { Checkbox } from "@/lib/components/ui/checkbox";
 import type { ColumnDef } from "@tanstack/react-table";
-import { Button } from "@/lib/components/ui/button";
+import { Button, buttonVariants } from "@/lib/components/ui/button";
 import Link from "next/link";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/lib/components/ui/tooltip";
+import type { Link as ILink } from "@prisma/client";
 
-export type Link = {
-  id: number;
-  url: string;
-  slug: string;
-  status: "active" | "inactive" | "disabled";
-  clicks: number;
-  created_at: string;
-  protected: boolean;
-};
-
-export const linksColumns: ColumnDef<Link>[] = [
+export const linksColumns: ColumnDef<ILink>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -58,7 +49,7 @@ export const linksColumns: ColumnDef<Link>[] = [
           target="_blank"
           rel="noopener noreferrer"
         >
-          {finalUrl.length > 50 ? `${finalUrl.substring(0, 35)}` : finalUrl}
+          {finalUrl.length > 50 ? `${finalUrl.substring(0, 35)}...` : finalUrl}
         </Link>
       ) : (
         <div className="text-center">N/A</div>
@@ -131,17 +122,16 @@ export const linksColumns: ColumnDef<Link>[] = [
       );
     },
   },
-  { header: "Created At", accessorKey: "created_at" },
-  // actions
+  { header: "by", accessorKey: "created_by" },
+  { header: "at", accessorKey: "created_at" },
   {
     id: "actions",
-    header: () => <span className="sr-only">Actions</span>,
-    cell: () => (
-      <Button variant={"ghost"}>
-        <Settings className="h-4 w-4" />
-      </Button>
-    ),
     enableSorting: false,
     enableHiding: false,
+    cell: () => (
+      <Link href={`links/${1}`} className={buttonVariants({ variant: "outline"})} passHref>
+        <Settings className="h-4 w-4" />
+      </Link>
+    )
   }    
 ];
